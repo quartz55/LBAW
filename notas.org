@@ -1,0 +1,12 @@
+* LBAW
+
+Grupo 42
+*Tema 4 - Online Shop*
+| *UNAME:* lbaw1542 |
+| *PW:* IT47N3X1    |
+
+** A1
+*** TODO Enquadramento (loja existente pretende criar plataforma online)
+*** TODO Separar motivação e funcionalidades específicas
+*** TODO Guest
+*** TODO Modo como as compras são feitas
