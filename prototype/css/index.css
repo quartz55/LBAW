@@ -1,0 +1,43 @@
+.site-nav {
+  padding-top: 15px;
+}
+
+html, body {
+  background: #eee;
+}
+
+.site-wrapper {
+  background-color: white;
+  max-width: 1200px;
+  width: 100%
+}
+
+.text-price {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: rgb(30, 180, 15);
+}
+
+.product-list-name {
+  font-weight: bold;
+  font-size: 1em;
+}
+.product > a {
+  text-decoration: none;
+  color: inherit;
+}
+.product:hover {
+  background: rgba(0,0,0,0.1);
+}
+.product hr {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+.product-image {
+  max-width: 100%;
+}
+
+#searchInput {
+  padding-right: 0;
+  margin-right: 0;
+}
