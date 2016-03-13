@@ -1,100 +1,75 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/index.css">
-
-  <title>Prototype</title>
-</head>
-<body>
-  <div class="container site-wrapper">
-    <!-- HEADER -->
-    <header class="row">
-      <div class="col-sm-4">
-        <h1>Online Shop</h1>
-      </div>
-
-      <!-- NAVIGATION -->
-      <nav class="col-sm-8 navbar navbar-default">
-        <div class="container-fluid">
-          <ul class="nav navbar-nav navbar-right site-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li class="active"><a href="contact.html">Contact</a></li>
-          </ul>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Test</title>
+  </head>
+  <body>
+    <div class="container site-wrapper">
+      <header class="row">
+        <div class="col-sm-4">
+          <h1>Online Shop</h1>
         </div>
-      </nav>
-    </header>
-
-    <main class="row">
-      <!-- LEFT SIDEBAR -->
-      <aside class="col-sm-2 left-panel">
-        <div class="user-panel">
-          <h3>Welcome <strong>Guest</strong></h3>
-          <nav class="navbar">
-            <div class="container-fluid">
-              <ul class="nav nav-stacked">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-              </ul>
-            </div>
-          </nav>
+        <nav class="col-sm-8 navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right site-nav">
+              <li><span class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span>  0 Items in cart</span></li>
+              <li><a href="index.html"> Home </a></li>
+              <li><a href="products.html"> Products </a></li>
+              <li><a href="contact.html"> Contact </a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main class="row">
+        <aside class="col-sm-2 left-panel">
+          <div class="user-panel">
+            <h3>Welcome <strong>Guest</strong> </h3>
+            <nav class="navbar">
+              <div class="container-fluid">
+                <ul class="nav nav-stacked">
+                  <li><a href="#">Login</a></li>
+                  <li><a href="#">Register</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </aside>
+        <div class="col-sm-8 main-content">
+          <h3>Contact</h3>
+          <hr>
+          <p>Contact information here</p>
         </div>
-      </aside>
-      <!-- END LEFT SIDEBAR -->
-
-      <!-- MAIN CONTENT -->
-      <div class="col-sm-8">
-        <article>
-          <h3>Contact Information</h3>
-          <hr>
-          <p>Contact Information here</p>
-        </article>
-      </div>
-      <!-- END MAIN CONTENT -->
-
-      <!-- RIGHT SIDEBAR -->
-      <aside class="col-sm-2 right-panel">
-        <!-- DISCOUNTS -->
-        <div class="discounts">
-          <h3>Discounts</h3>
-          <hr>
-          <div class="thumbnail discount-product">
-            <img src="http://placehold.it/350x250">
-            <div class="caption">
-              <h4>Example Discount 1</h4>
-              <span class="price-tag">€5.49</span>
+        <aside class="col-sm-2 right-panel">
+          <div class="discounts">
+            <h3>Discounts</h3>
+            <hr>
+            <div class="thumbnail discount-product"><img src="http://placehold.it/350x250">
+              <div class="caption">
+                <h4>Example Discount 1</h4><span class="price-tag">&euro;5.49</span>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- RANDOM ITEM -->
-        <div class="random">
-          <h3>Random Item</h3>
-          <hr>
-          <div class="thumbnail discount-product">
-            <img src="http://placehold.it/350x250">
-            <div class="caption">
-              <h4>Random Product 1</h4>
-              <span class="price-tag">€6.17</span>
+          <div class="random">
+            <h3>Random Item</h3>
+            <hr>
+            <div class="thumbnail discount-product"><img src="http://placehold.it/350x250">
+              <div class="caption">
+                <h4>Random Product 1</h4><span class="price-tag">&euro;6.21</span>
+              </div>
             </div>
           </div>
+        </aside>
+      </main>
+      <footer class="row">
+        <div class="col-xs-12">
+          <h4>LBAW</h4>
         </div>
-      </aside>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="row">
-      <div class="col-xs-12">
-        <h4>LBAW</h4>
-      </div>
-    </footer>
-
-  </div>
-</body>
+      </footer>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,36 @@
+//output:$1.html
+include ./mixins.jade
+
+doctype html
+html(lang="en")
+	head
+		include ./head.jade
+		link(rel="stylesheet" href="css/index.css")
+		title Test
+	body
+		div.container.site-wrapper
+			include ./header.jade
+			
+			main.row
+				include ./user-panel.jade
+				div.col-sm-8.main-content
+					h3 Products List
+					hr
+					- for (var i = 0; i < 3; ++i)
+						article.product.container-fluid
+							+listed-product("Product 1", "5.99", "Lorem Ipsum Dolor")
+				
+				aside.col-sm-2.right-panel
+					div.search
+						h3 Search
+						hr
+						form.form-horizontal.search-form
+							div.form-group
+								span.col-xs-8
+									input(type="text" class="form-control" id="searchInput" placeholder="Type here...")
+								span.col-xs-4
+									button(type="submit" class="btn btn-default glyphicon glyphicon-search")
+			
+			footer.row
+				div.col-xs-12
+					h4 LBAW
