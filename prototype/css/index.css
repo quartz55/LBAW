@@ -18,15 +18,37 @@ html, body {
   color: rgb(30, 180, 15);
 }
 
+nav.navbar-default {
+  background: transparent;
+  border: transparent;
+}
+
+.price-tag {
+  font-weight: bold;
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 5px;
+  color: rgb(13, 91, 4);
+  background: rgb(80, 200, 100);
+}
+
 .product-list-name {
   font-weight: bold;
   font-size: 1em;
+}
+.product {
+  padding-bottom: 1em;
 }
 .product > a {
   text-decoration: none;
   color: inherit;
 }
+.product-list-info *{
+  max-height: 100px;
+}
 .product:hover {
+  cursor: pointer;
+  border-radius: 5px;
   background: rgba(0,0,0,0.1);
 }
 .product hr {
@@ -34,7 +56,13 @@ html, body {
   margin-bottom: 1em;
 }
 .product-image {
-  max-width: 100%;
+}
+
+.product h5 {
+}
+.product .price-tag {
+  float: right;
+  display: inline;
 }
 
 #searchInput {
