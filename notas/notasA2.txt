@@ -1,0 +1,6 @@
+A melhorar:
+- imagem na vertical
+- tabela a descrever os actores
+- ver o carrinho de compra e wich list no client, view e edit profil
+- consolidar os conceitos de review, coments
+- ter acesso ao historico e recomendaçoes no buyer
