@@ -1,0 +1,16 @@
+mixin listed-product(name, price, description)
+  h5.product-list-name=name
+  span.price-tag &euro;#{price}
+  hr
+  div.row.product-list-info
+    div.col-sm-3
+      img.img-responsive.img-rounded.product-image(src="http://placehold.it/350x250")
+    div.col-sm-9.product-list-description
+      p=description
+
+mixin thumbnail-product(name, price, image)
+  div.thumbnail
+    img(src=image)
+    div.caption
+      h4=name
+      span.price-tag &euro;#{price}

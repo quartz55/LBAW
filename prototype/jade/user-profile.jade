@@ -1,0 +1,37 @@
+//output:$1.html
+include ./mixins.jade
+
+doctype html
+html(lang="en")
+  head
+    include ./head.jade
+    link(rel="stylesheet" href="css/products.css")
+    title User Profile
+  body
+    div.container.site-wrapper
+      include ./header.jade
+
+      main.row
+        div.col-sm-8.main-content
+          h3 Example User Profile
+          hr
+          img.img-responsive.img-rounded(src="http://placehold.it/100x100")
+          br
+          ul.list-unstyled
+            li
+              a(href="#") Purchase history
+            li
+              a(href="#") Change password
+            li
+              a(href="#") Logout
+        aside.col-sm-4.right-panel
+          div.recent-purchases
+            h3 Recent Purchases
+            hr
+            - for (var i = 0; i < 3; ++i)
+              article.product.container-fluid
+                +listed-product("Recent Purchase 1","7.23","Lorem Ipsum Dolor")
+
+      footer.row
+        div.col-xs-12
+          h4 LBAW

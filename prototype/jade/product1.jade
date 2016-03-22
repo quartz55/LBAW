@@ -1,0 +1,59 @@
+include ./mixins.jade
+
+doctype html
+html(lang="en")
+  head
+    include ./head.jade
+    link(rel="stylesheet" href="css/product.css")
+    title Product Page Example
+  body
+    div.container.site-wrapper
+      include ./header.jade
+
+      main.row
+        include ./user-panel.jade
+        div.col-sm-10.main-content
+          div.container-fluid
+            div.row
+              div.col-xs-12
+                h3 Example Product 1
+              div.col-xs-12
+                span.price-tag €5.45
+                span.btn.btn-warning.add-to-cart
+                  span.glyphicon.glyphicon-shopping-cart
+                  |  Add to cart
+                hr
+            div.row
+              div.col-xs-12.col-sm-4
+                img.img-responsive.img-thumbnail(src="http://placehold.it/250x250")
+              div.col-xs-12.col-sm-8
+                - for (var i = 0; i < 3; ++i)
+                  p
+                    strong Description:
+                    |  Lorem Ipsum Dolor
+              div.col-xs-12
+                h4.text-muted Additional Info
+                hr
+                p Lorem Ipsum Dolor
+                p Lorem Ipsum Dolor
+                p Lorem Ipsum Dolor
+
+              div.col-xs-12
+                h4.text-muted Reviews
+                hr
+
+            div.row
+              div.col-xs-12.col-sm-3
+                p
+                  strong Average:
+                  |  3/5 stars
+                p 3 Reviews
+              div.col-xs-12.col-sm-9
+                - for (var i = 0; i < 3; ++i)
+                  article.user-review
+                    h4.text-muted 3 Stars | Review Title
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis massa, ullamcorper vel erat non, faucibus interdum justo. Morbi in commodo felis. Cras blandit libero risus, eget fringilla nunc pellentesque eleifend. Cras nec dignissim enim. Sed vel nisl enim. Morbi euismod non elit auctor porttitor. Mauris non arcu cursus enim pulvinar rhoncus. Sed a eros at nulla accumsan aliquam. Aliquam fermentum lorem sem, id mollis velit scelerisque vel. Donec ut semper odio.
+
+      footer.row
+        div.col-xs-12
+          h4 LBAW
