@@ -1,0 +1,46 @@
+//output:$1.html
+include ./mixins.jade
+
+doctype html
+html(lang="en")
+  head
+    include ./head.jade
+    link(rel="stylesheet" href="css/index.css")
+    title Test
+  body
+    div.container.site-wrapper
+      include ./header.jade
+
+      main.row
+        include ./user-panel.jade
+        div.col-sm-10.col-md-8.main-content
+          article
+            h3.txt-panel.txt-panel-inv Welcome to Online Shop
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis vitae leo sit amet bibendum. Nulla nec nibh id ligula blandit rhoncus.
+
+          h3.txt-panel.txt-panel Featured Products
+          div.featured-products.row
+            div.col-sm-4
+              +thumbnail-product("P1", "9.99", "http://placehold.it/350x250")
+            div.col-sm-4
+              +thumbnail-product("P1", "9.99", "http://placehold.it/350x250")
+            div.col-sm-4
+              +thumbnail-product("P1", "9.99", "http://placehold.it/350x250")
+
+        aside.col-sm-12.col-md-2.right-panel
+          div.row
+            div.col-sm-5.col-sm-offset-2.col-md-offset-0.col-md-12
+              div.discounts
+                h3 Discounts
+                hr
+                +thumbnail-product("P1", "5.49", "http://placehold.it/350x250")
+
+            div.col-sm-5.col-md-12
+              div.random
+                h3 Random Item
+                hr
+                +thumbnail-product("P1", "5.49", "http://placehold.it/350x250")
+
+      footer.row
+        div.col-xs-12
+          h4 LBAW
