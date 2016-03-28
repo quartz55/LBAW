@@ -1,0 +1,52 @@
+include ./mixins.jade
+
+doctype html
+html(lang="en")
+  head
+    include ./head.jade
+    link(rel="stylesheet" href="css/cart.css")
+    script(type="text/javascript" src="js/cart.js")
+    title Test
+  body
+    div.container.site-wrapper
+      include ./header.jade
+
+      main.row
+        include ./user-panel.jade
+        div.col-sm-10.col-md-8.main-content
+          h3.txt-panel.txt-panel-inv Shopping Cart
+          div.container-fluid
+            div.cart-header.row
+              div.col-xs-12.txt-panel
+                span.cart-items-number 0
+                |  Items in cart
+                span.cart-cost. €100
+                span.btn.btn-default.checkout-btn Checkout
+
+            article.cart-product.row
+              div.col-xs-12
+                div.row
+                  div.col-xs-2
+                    img.img-responsive.img-rounded.cart-product-img(src="http://placehold.it/350x250x")
+                  div.col-xs-10
+                    div.cart-product-name Cart Product 1
+                    div.price-tag €5.49
+                    span.remove-cart-item.btn.btn-default Remove
+
+        aside.col-sm-12.col-md-2.right-panel
+          div.row
+            div.col-sm-5.col-sm-offset-2.col-md-offset-0.col-md-12
+              div.discounts
+                h3 Discounts
+                hr
+                +thumbnail-product("P1", "5.49", "http://placehold.it/350x250")
+
+            div.col-sm-5.col-md-12
+              div.random
+                h3 Random Item
+                hr
+                +thumbnail-product("P1", "5.49", "http://placehold.it/350x250")
+
+      footer.row
+        div.col-xs-12
+          h4 LBAW

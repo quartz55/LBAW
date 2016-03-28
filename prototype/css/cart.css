@@ -1,0 +1,35 @@
+.checkout-btn {
+    float: right;
+}
+
+.cart-cost {
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.cart-header {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cart-header .txt-panel {
+    /* padding: 0; */
+    margin: 0;
+}
+
+.cart-product {
+    margin: 1rem 0;
+}
+
+.main-content .cart-product:last-child {
+    /* background: red; */
+    margin-bottom: 2rem;
+}
+
+.cart-product img {
+    width: 100px;
+}
+
+.remove-cart-item {
+    float: right;
+}

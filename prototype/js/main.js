@@ -13,6 +13,7 @@ $(function () {
     setCartItems();
 
     $(".add-to-cart").click(addCartItem);
+    $(".shopping-cart").click(function() {window.location.href = "./cart.html";});
 });
 
 function getCurentFileName(){

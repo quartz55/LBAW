@@ -9,9 +9,7 @@ html, body {
 }
 
 .site-nav {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+    margin-top: 1.2em;
 }
 
 .shopping-cart {
