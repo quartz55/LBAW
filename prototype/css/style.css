@@ -12,6 +12,14 @@ html, body {
     margin-top: 1.2em;
 }
 
+.site-nav li a {
+    color: white;
+}
+
+.site-nav li a:hover {
+    color: black;
+}
+
 .shopping-cart {
     margin-top: 0.3em;
     margin-right: 1em;
