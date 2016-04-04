@@ -6,7 +6,22 @@ Grupo 42
 | *PW:* IT47N3X1    |
 
 ** A1
-*** TODO Enquadramento (loja existente pretende criar plataforma online)
-*** TODO Separar motivação e funcionalidades específicas
-*** TODO Guest
-*** TODO Modo como as compras são feitas
+*** DONE Enquadramento (loja existente pretende criar plataforma online)
+    CLOSED: [2016-04-04 Mon 14:58]
+*** DONE Separar motivação e funcionalidades específicas
+    CLOSED: [2016-04-04 Mon 14:58]
+*** DONE Guest
+    CLOSED: [2016-04-04 Mon 14:58]
+*** DONE Modo como as compras são feitas
+    CLOSED: [2016-04-04 Mon 14:59]
+** A5
+*** TODO Classes de associaçao para Rate e Purchase
+*** TODO Wishlist tem varios produtos (transformar em associaçao)
+*** TODO Transformar shopping cart em associaçao
+*** TODO Combinar as setas de derivação de admin e client
+*** TODO Passar tags para classe à parte (array nao existe)
+*** TODO Rever os descontos e featured (fazer uma lista ou passar a atributo)
+*** TODO Adicionar data aos descontos e featured (so tem duraçao, quado começa?)
+** A6
+*** TODO Rever as relaçoes e as tabelas para o novo UML do A5
+*** TODO BCNF
