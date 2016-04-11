@@ -196,7 +196,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS deletePurchase ON Purchase;
+DROP TRIGGER IF EXISTS deletePurchase ON Checkout;
 CREATE TRIGGER deletePurchase
 BEFORE DELETE ON Checkout
 EXECUTE PROCEDURE deletePurchase();
+
+
+CREATE OR REPLACE FUNCTION deletePerson() RETURNS TRIGGER AS $$
+BEGIN
+  DELETE FROM Client WHERE OLD.idPerson =
+  Client.idPerson;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS deletePerson ON Person;
+CREATE TRIGGER deletePerson
+BEFORE DELETE ON Client
+EXECUTE PROCEDURE deletePerson();
