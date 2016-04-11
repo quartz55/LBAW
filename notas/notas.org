@@ -15,13 +15,20 @@ Grupo 42
 *** DONE Modo como as compras são feitas
     CLOSED: [2016-04-04 Mon 14:59]
 ** A5
-*** TODO Classes de associaçao para Rate e Purchase
-*** TODO Wishlist tem varios produtos (transformar em associaçao)
-*** TODO Transformar shopping cart em associaçao
-*** TODO Combinar as setas de derivação de admin e client
-*** TODO Passar tags para classe à parte (array nao existe)
-*** TODO Rever os descontos e featured (fazer uma lista ou passar a atributo)
-*** TODO Adicionar data aos descontos e featured (so tem duraçao, quado começa?)
+*** DONE Classes de associaçao para Rate e Purchase
+    CLOSED: [2016-04-09 Sat 14:37]
+*** DONE Wishlist tem varios produtos (transformar em associaçao)
+    CLOSED: [2016-04-09 Sat 14:45]
+*** DONE Transformar shopping cart em associaçao
+    CLOSED: [2016-04-09 Sat 14:45]
+*** DONE Combinar as setas de derivação de admin e client
+    CLOSED: [2016-04-09 Sat 14:11]
+*** DONE Passar tags para classe à parte (array nao existe)
+    CLOSED: [2016-04-09 Sat 14:11]
+*** DONE Rever os descontos e featured (fazer uma lista ou passar a atributo)
+    CLOSED: [2016-04-09 Sat 14:51]
+*** DONE Adicionar data aos descontos e featured (so tem duraçao, quado começa?)
+    CLOSED: [2016-04-09 Sat 14:51]
 ** A6
 *** TODO Rever as relaçoes e as tabelas para o novo UML do A5
 *** TODO BCNF
