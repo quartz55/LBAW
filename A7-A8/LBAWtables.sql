@@ -38,7 +38,7 @@ CREATE TABLE Product (
     code integer NOT NULL,
     name text NOT NULL,
     price numeric CHECK(price > 0),
-    stock integer CHECK(stock > 0),
+    stock integer CHECK(stock >= 0),
     tags integer ARRAY,
     weight numeric CHECK(weight > 0),
     discount numeric CHECK(discount > 0),
