@@ -72,8 +72,6 @@ CREATE TABLE Checkout (
     idPerson integer NOT NULL,
     CONSTRAINT fk_Client FOREIGN KEY(idPerson) REFERENCES Client(idPerson),
 
-    PRIMARY KEY(idCheckout)
-);
 
 CREATE TABLE Purchase (
     idProduct integer NOT NULL REFERENCES Product(idProduct),
@@ -179,12 +177,26 @@ ON TagsProducts USING btree (idTags);
 
 CREATE OR REPLACE FUNCTION decStock() RETURNS TRIGGER AS $$
 BEGIN
-New.stock = old.stock - quantity;
-RETURN New.stock;
+  New.stock = old.stock - quantity;
+  RETURN New.stock;
 END;
 $$
 LANGUAGE plpgsql;
+
 DROP TRIGGER IF EXISTS decStockAfterPurchase ON Product;
 CREATE TRIGGER decStockAfterPurchase
 BEFORE INSERT ON Purchase
 EXECUTE PROCEDURE decStock();
+
+
+CREATE OR REPLACE FUNCTION deletePurchase() RETURNS TRIGGER AS $$
+BEGIN
+  DELETE FROM Purchase WHERE OLD.idCheckout =
+  Purchase.idCheckout;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS deletePurchase ON Purchase;
+CREATE TRIGGER deletePurchase
+BEFORE DELETE ON Checkout
+EXECUTE PROCEDURE deletePurchase();
