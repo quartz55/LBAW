@@ -121,3 +121,70 @@ CREATE TABLE TagsProducts (
 
     CONSTRAINT pk_TagsProducts PRIMARY KEY(idTags,idProduct)
 );
+
+-- Indexes
+
+CREATE INDEX idPerson
+ON Person USING btree (idPerson);
+
+CREATE INDEX idPerson
+ON SystemAdmnistrator USING btree (idPerson);
+
+CREATE INDEX idPerson
+ON Client USING btree (idPerson);
+
+CREATE INDEX idProduct
+ON Product USING btree (idProduct);
+
+CREATE INDEX idProduct
+ON Rate USING btree (idProduct);
+
+CREATE INDEX idPerson
+ON Rate USING btree (idPerson);
+
+CREATE INDEX idPerson
+ON ShoppingCart USING btree (idPerson);
+
+CREATE INDEX idProduct
+ON ShoppingCart USING btree (idProduct);
+
+CREATE INDEX idCheckout
+ON Checkout USING btree (idCheckout);
+
+CREATE INDEX idCheckout
+ON Purchase USING btree (idCheckout);
+
+CREATE INDEX idProduct
+ON Purchase USING btree (idProduct);
+
+CREATE INDEX idSupportTicket
+ON SupportTicket USING btree (idSupportTicket);
+
+CREATE INDEX idProduct
+ON WishList USING btree (idProduct);
+
+CREATE INDEX idPerson
+ON WishList USING btree (idPerson);
+
+CREATE INDEX idTags
+ON Tags USING btree (idTags);
+
+CREATE INDEX idProduct
+ON TagsProducts USING btree (idProduct);
+
+CREATE INDEX idTags
+ON TagsProducts USING btree (idTags);
+
+-- Triggers
+
+CREATE OR REPLACE FUNCTION decStock() RETURNS TRIGGER AS $$
+BEGIN
+New.stock = old.stock - quantity;
+RETURN New.stock;
+END;
+$$
+LANGUAGE plpgsql;
+DROP TRIGGER IF EXISTS decStockAfterPurchase ON Product;
+CREATE TRIGGER decStockAfterPurchase
+BEFORE INSERT ON Purchase
+EXECUTE PROCEDURE decStock();
