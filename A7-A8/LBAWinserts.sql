@@ -41,11 +41,13 @@ INSERT INTO Client (idPerson,address,email) VALUES (9,'Rua S.Joao','tonyM@hotmai
 INSERT INTO SystemAdministrator (idPerson) VALUES (5);
 
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (1,'2010-04-20',1);
+INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (6,'2010-04-20',1);
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (2,'2010-04-20',3);
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (3,'2015-07-20',6);
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (4,'2013-07-23',8);
 
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (1,1,59.25,1);
+INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (6,6,59.25,1);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (3,2,50,2);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (4,3,70,4);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (2,4,40,1);
@@ -69,3 +71,4 @@ INSERT INTO Tags (name) VALUES ('cabos-fibras');
 INSERT INTO TagsProducts (idTags,idProduct) VALUES (1,3);
 
 INSERT INTO SupportTicket (createDate,reason,solveDate,title,idClient,idAdmin,idPurchase) VALUES ('2013-05-12','Wrong cable size','2013-05-14','Optical Fiber',3,5,3);
+
