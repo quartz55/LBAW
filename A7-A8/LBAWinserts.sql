@@ -11,7 +11,6 @@ TRUNCATE TagsProducts CASCADE;
 TRUNCATE Rate CASCADE;
 TRUNCATE ShoppingCart CASCADE;
 
-
 INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10245,'Black&Decker X102',59.25,20,NULL,3,20,NULL,'yes');
 INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10246,'Black&Decker Z150',80.50,25,NULL,2.30,20,NULL,'yes');
 INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10140,'Optical Fiber OM3LC/LC 30m',25,10,NULL,0.20,5,NULL,'yes');
@@ -70,5 +69,4 @@ INSERT INTO Tags (name) VALUES ('cabos-fibras');
 
 INSERT INTO TagsProducts (idTags,idProduct) VALUES (1,3);
 
-INSERT INTO SupportTicket (createDate,reason,solveDate,title,idClient,idAdmin,idPurchase) VALUES ('2013-05-12','Wrong cable size','2013-05-14','Optical Fiber',3,5,3);
-
+INSERT INTO SupportTicket (createDate,reason,solveDate,title,idClient,idAdmin,idProduct,idCheckout) VALUES ('2013-05-12','Wrong cable size','2013-05-14','Optical Fiber',3,5,3,2);
