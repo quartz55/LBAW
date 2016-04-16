@@ -35,13 +35,13 @@ CREATE TABLE Client (
 
 CREATE TABLE Product (
     idProduct SERIAL NOT NULL,
-    code integer NOT NULL,
-    name text NOT NULL,
-    price numeric CHECK(price > 0),
-    stock integer CHECK(stock >= 0),
+    code integer UNIQUE NOT NULL,
+    name text UNIQUE NOT NULL,
+    price numeric NOT NULL CHECK(price > 0),
+    stock integer NOT NULL CHECK(stock >= 0),
     tags integer ARRAY,
-    weight numeric CHECK(weight > 0),
-    discount numeric CHECK(discount > 0),
+    weight numeric NOT NULL CHECK(weight > 0),
+    discount numeric NOT NULL CHECK(discount > 0),
     discountEnd Date,
     featured boolean,
 
@@ -52,7 +52,7 @@ CREATE TABLE Rate (
     idPerson integer NOT NULL REFERENCES Client(idPerson),
     idProduct integer NOT NULL REFERENCES Product(idProduct),
     date date NOT NULL,
-    rating numeric CHECK(rating >= 0 AND rating <= 5),
+    rating numeric NOT NULL CHECK(rating >= 0 AND rating <= 5),
     title text,
     description text,
 
@@ -72,15 +72,16 @@ CREATE TABLE Checkout (
     idPerson integer NOT NULL,
     CONSTRAINT fk_Client FOREIGN KEY(idPerson) REFERENCES Client(idPerson),
 
+    PRIMARY KEY(idCheckout)
+);
 
 CREATE TABLE Purchase (
     idProduct integer NOT NULL REFERENCES Product(idProduct),
-    idCheckout integer NOT NULL,
+    idCheckout integer NOT NULL REFERENCES Checkout(idCheckout),
     price numeric NOT NULL CHECK(price > 0),
     quantity integer CHECK (quantity > 0),
 
-    CONSTRAINT fk_Checkout FOREIGN KEY(idCheckout) REFERENCES Checkout(idCheckout),
-    CONSTRAINT pk_Purchase PRIMARY KEY(idProduct)
+    CONSTRAINT pk_Purchase PRIMARY KEY(idProduct,idCheckout)
 );
 
 CREATE TABLE SupportTicket (
@@ -91,10 +92,11 @@ CREATE TABLE SupportTicket (
     title text NOT NULL,
     idClient integer NOT NULL,
     idAdmin integer NOT NULL,
-    idPurchase integer NOT NULL,
+    idProduct integer NOT NULL,
+    idCheckout integer NOT NULL,
     CONSTRAINT fk_Client FOREIGN KEY(idClient) REFERENCES Client(idPerson),
     CONSTRAINT fk_SystemAdmnistrator FOREIGN KEY(idAdmin) REFERENCES SystemAdministrator(idPerson),
-    CONSTRAINT fk_Purchase FOREIGN KEY(idPurchase) REFERENCES Purchase(idProduct),
+    CONSTRAINT fk_Purchase FOREIGN KEY(idProduct,idCheckout) REFERENCES Purchase(idProduct,idCheckout),
 
     PRIMARY KEY(idSupportTicket)
 );
@@ -122,94 +124,89 @@ CREATE TABLE TagsProducts (
 
 -- Indexes
 
-CREATE INDEX idPerson
-ON Person USING btree (idPerson);
-
-CREATE INDEX idPerson
-ON SystemAdmnistrator USING btree (idPerson);
-
-CREATE INDEX idPerson
-ON Client USING btree (idPerson);
-
-CREATE INDEX idProduct
-ON Product USING btree (idProduct);
-
-CREATE INDEX idProduct
-ON Rate USING btree (idProduct);
-
-CREATE INDEX idPerson
-ON Rate USING btree (idPerson);
-
-CREATE INDEX idPerson
-ON ShoppingCart USING btree (idPerson);
-
-CREATE INDEX idProduct
-ON ShoppingCart USING btree (idProduct);
-
-CREATE INDEX idCheckout
-ON Checkout USING btree (idCheckout);
-
-CREATE INDEX idCheckout
-ON Purchase USING btree (idCheckout);
-
-CREATE INDEX idProduct
-ON Purchase USING btree (idProduct);
-
-CREATE INDEX idSupportTicket
-ON SupportTicket USING btree (idSupportTicket);
-
-CREATE INDEX idProduct
-ON WishList USING btree (idProduct);
-
-CREATE INDEX idPerson
-ON WishList USING btree (idPerson);
-
-CREATE INDEX idTags
-ON Tags USING btree (idTags);
-
-CREATE INDEX idProduct
-ON TagsProducts USING btree (idProduct);
-
-CREATE INDEX idTags
-ON TagsProducts USING btree (idTags);
+CREATE INDEX email
+ON Client USING btree(email);
 
 -- Triggers
 
-CREATE OR REPLACE FUNCTION decStock() RETURNS TRIGGER AS $$
+-- Trigger responsavel por verificar se a compra e possivel, comparando a quantidade desejada com o stock
+CREATE OR REPLACE FUNCTION checkStock() RETURNS TRIGGER AS $$
 BEGIN
-  New.stock = old.stock - quantity;
-  RETURN New.stock;
+  IF NEW.quantity > (SELECT stock FROM Product WHERE
+  NEW.idProduct = idProduct) THEN
+  RAISE EXCEPTION 'Nao e possivel efectuar a compra pois nao ha stock suficiente';
+  END IF;
+  RETURN NEW;
 END;
 $$
 LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS decStockAfterPurchase ON Product;
-CREATE TRIGGER decStockAfterPurchase
-BEFORE INSERT ON Purchase
+CREATE TRIGGER checkStock
+BEFORE INSERT OR UPDATE ON Purchase
+FOR EACH ROW
+EXECUTE PROCEDURE checkStock();
+
+-- Trigger responsavel por decrementar o stock apos a compra
+CREATE OR REPLACE FUNCTION decStock() RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE Product
+  SET stock = ((SELECT stock FROM Product WHERE
+  NEW.idProduct = idProduct) - NEW.quantity)
+  WHERE NEW.idProduct = idProduct;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER decStock
+AFTER INSERT ON Purchase
+FOR EACH ROW
 EXECUTE PROCEDURE decStock();
 
-
-CREATE OR REPLACE FUNCTION deletePurchase() RETURNS TRIGGER AS $$
+-- Triggers que impossivel a criaçao de um client e um SystemAdministrator com o mesmo id
+CREATE OR REPLACE FUNCTION checkIDAdmin() RETURNS TRIGGER AS $$
 BEGIN
-  DELETE FROM Purchase WHERE OLD.idCheckout =
-  Purchase.idCheckout;
+  IF NEW.idPerson = (SELECT idPerson FROM Client WHERE
+  NEW.idPerson = idPerson) THEN
+  RAISE EXCEPTION 'invalid id to SystemAdministrator';
+  END IF;
+  RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$
+LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS deletePurchase ON Checkout;
-CREATE TRIGGER deletePurchase
-BEFORE DELETE ON Checkout
-EXECUTE PROCEDURE deletePurchase();
+CREATE TRIGGER checkIDAdmin
+BEFORE INSERT OR UPDATE ON SystemAdministrator
+FOR EACH ROW
+EXECUTE PROCEDURE checkIDAdmin();
 
-
-CREATE OR REPLACE FUNCTION deletePerson() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION checkIDClient() RETURNS TRIGGER AS $$
 BEGIN
-  DELETE FROM Client WHERE OLD.idPerson =
-  Client.idPerson;
+  IF NEW.idPerson = (SELECT idPerson FROM SystemAdministrator WHERE
+  NEW.idPerson = idPerson) THEN
+  RAISE EXCEPTION 'invalid id to Client';
+  END IF;
+  RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$
+LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS deletePerson ON Person;
-CREATE TRIGGER deletePerson
-BEFORE DELETE ON Client
-EXECUTE PROCEDURE deletePerson();
+CREATE TRIGGER checkIDClient
+BEFORE INSERT OR UPDATE ON Client
+FOR EACH ROW
+EXECUTE PROCEDURE checkIDClient();
+
+-- Trigger que remove do ShoppingCart um produto que tem stock null, é feito antes da inserçao da tabela ShoppingCart
+CREATE OR REPLACE FUNCTION removeProductOfShoppingCart() RETURNS TRIGGER AS $$
+BEGIN
+  DELETE FROM ShoppingCart WHERE NEW.idProduct = (SELECT idProduct FROM
+    Product WHERE stock=0);
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER removeProductOfShoppingCart
+BEFORE INSERT ON ShoppingCart
+FOR EACH ROW
+EXECUTE PROCEDURE removeProductOfShoppingCart();
