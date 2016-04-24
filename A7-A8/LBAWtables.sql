@@ -39,11 +39,11 @@ CREATE TABLE Product (
     name text UNIQUE NOT NULL,
     price numeric NOT NULL CHECK(price > 0),
     stock integer NOT NULL CHECK(stock >= 0),
-    tags integer ARRAY,
     weight numeric NOT NULL CHECK(weight > 0),
     discount numeric NOT NULL CHECK(discount > 0),
     discountEnd Date,
     featured boolean,
+    description text NOT NULL,
 
     PRIMARY KEY(idProduct)
 );
@@ -62,6 +62,7 @@ CREATE TABLE Rate (
 CREATE TABLE ShoppingCart (
     idPerson integer NOT NULL REFERENCES Client(idPerson),
     idProduct integer NOT NULL REFERENCES Product(idProduct),
+    quantity integer NOT NULL CHECK(quantity>0),
 
     CONSTRAINT pk_ShoppingCart PRIMARY KEY(idPerson,idProduct)
 );
@@ -129,12 +130,12 @@ ON Client USING btree(email);
 
 -- Triggers
 
--- Trigger responsavel por verificar se a compra e possivel, comparando a quantidade desejada com o stock
+-- Trigger responsavel por verificar se adicionar ao ShoppingCart e possivel, comparando a quantidade desejada com o stock
 CREATE OR REPLACE FUNCTION checkStock() RETURNS TRIGGER AS $$
 BEGIN
   IF NEW.quantity > (SELECT stock FROM Product WHERE
   NEW.idProduct = idProduct) THEN
-  RAISE EXCEPTION 'Nao e possivel efectuar a compra pois nao ha stock suficiente';
+  RAISE EXCEPTION 'Nao e possivel adicionar ao ShoppingCart pois nao ha stock suficiente';
   END IF;
   RETURN NEW;
 END;
@@ -142,11 +143,11 @@ $$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER checkStock
-BEFORE INSERT OR UPDATE ON Purchase
+BEFORE INSERT OR UPDATE ON ShoppingCart
 FOR EACH ROW
 EXECUTE PROCEDURE checkStock();
 
--- Trigger responsavel por decrementar o stock apos a compra
+-- Trigger responsavel por decrementar o stock apos adicionar ao ShoppingCart
 CREATE OR REPLACE FUNCTION decStock() RETURNS TRIGGER AS $$
 BEGIN
   UPDATE Product
@@ -159,9 +160,34 @@ $$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER decStock
-AFTER INSERT ON Purchase
+AFTER INSERT ON ShoppingCart
 FOR EACH ROW
 EXECUTE PROCEDURE decStock();
+
+-- So e possivel fazer uma compra caso o produto tiver no carrinho, se tiver a quantidade e é apagado
+CREATE OR REPLACE FUNCTION purchaseIsPossible() RETURNS TRIGGER AS $$
+BEGIN
+  IF (NEW.idProduct IN (SELECT idProduct FROM ShoppingCart
+  WHERE idPerson IN
+  (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout))) AND
+  (NEW.quantity = (SELECT quantity FROM ShoppingCart WHERE idPerson IN
+  (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout) AND
+idProduct = NEW.idProduct))
+  THEN
+  DELETE FROM ShoppingCart WHERE idProduct = NEW.idProduct AND
+  idPerson=(SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout);
+  ELSE
+  RAISE EXCEPTION 'purchase isnt possible';
+  END IF;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER purchaseIsPossiblel
+BEFORE INSERT ON Purchase
+FOR EACH ROW
+EXECUTE PROCEDURE purchaseIsPossible();
 
 -- Triggers que impossivel a criaçao de um client e um SystemAdministrator com o mesmo id
 CREATE OR REPLACE FUNCTION checkIDAdmin() RETURNS TRIGGER AS $$
@@ -195,18 +221,3 @@ CREATE TRIGGER checkIDClient
 BEFORE INSERT OR UPDATE ON Client
 FOR EACH ROW
 EXECUTE PROCEDURE checkIDClient();
-
--- Trigger que remove do ShoppingCart um produto que tem stock null, é feito antes da inserçao da tabela ShoppingCart
-CREATE OR REPLACE FUNCTION removeProductOfShoppingCart() RETURNS TRIGGER AS $$
-BEGIN
-  DELETE FROM ShoppingCart WHERE NEW.idProduct = (SELECT idProduct FROM
-    Product WHERE stock=0);
-  RETURN NEW;
-END;
-$$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER removeProductOfShoppingCart
-BEFORE INSERT ON ShoppingCart
-FOR EACH ROW
-EXECUTE PROCEDURE removeProductOfShoppingCart();

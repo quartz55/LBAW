@@ -26,7 +26,7 @@ WHERE idPerson IN (SELECT idPerson FROM
 (SELECT * FROM Client) AS clients) AND idPerson IN (SELECT idPerson FROM
 (SELECT * FROM WishList WHERE idProduct=6) AS prod6);
 
---Todos os checkouts de um cliente, neste caso do “Mariotti Mizuna”. É utilizado o email na procura por ser unique. 
+--Todos os checkouts de um cliente, neste caso do “Mariotti Mizuna”. É utilizado o email na procura por ser unique.
 SELECT * FROM Checkout
  WHERE idPerson IN (SELECT idPerson FROM
   (SELECT * FROM Person WHERE name='marimizuna@gmail.com') AS clients);

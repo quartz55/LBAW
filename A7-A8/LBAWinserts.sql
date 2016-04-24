@@ -11,13 +11,13 @@ TRUNCATE TagsProducts CASCADE;
 TRUNCATE Rate CASCADE;
 TRUNCATE ShoppingCart CASCADE;
 
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10245,'Black&Decker X102',59.25,20,NULL,3,20,NULL,'yes');
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10246,'Black&Decker Z150',80.50,25,NULL,2.30,20,NULL,'yes');
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10140,'Optical Fiber OM3LC/LC 30m',25,10,NULL,0.20,5,NULL,'yes');
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10176,'Cabo de Rede 3m',5,25,NULL,0.5,5,NULL,'no');
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (10123,'Maquina Bricks Fibra',250,12,NULL,6.3,5,NULL,'no');
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (30455,'Yeezy Boots',469.99,19,NULL,0.3,5,NULL,'yes');
-INSERT INTO Product (code,name,price,stock,tags,weight,discount,discountEnd,featured) VALUES (30325,'Pregos',21.90,0,NULL,0.3,5,NULL,'yes');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (10245,'Black&Decker X102',59.25,20,3,20,NULL,'yes','info...');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (10246,'Black&Decker Z150',80.50,25,2.30,20,NULL,'yes','info...');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (10140,'Optical Fiber OM3LC/LC 30m',25,10,0.20,5,NULL,'yes','info...');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (10176,'Cabo de Rede 3m',5,25,0.5,5,NULL,'no','info...');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (10123,'Maquina Bricks Fibra',250,12,6.3,5,NULL,'no','info...');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (30455,'Yeezy Boots',469.99,19,0.3,5,NULL,'yes','info...');
+INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (30325,'Pregos',21.90,0,0.3,5,NULL,'yes','info...');
 
 INSERT INTO Person (name,password) VALUES ('Mariotti Mizuna','password');
 INSERT INTO Person (name,password) VALUES ('Carlitos Nicolia','valdagno5');
@@ -49,17 +49,17 @@ INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (2,'2010-04-20',3);
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (3,'2015-07-20',6);
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (4,'2013-07-23',8);
 
+INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (1,1,21);
+INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (1,7,1);
+INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (3,3,2);
+INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (6,4,4);
+INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (8,2,1);
+
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (1,1,59.25,21);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (6,6,59.25,1);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (3,2,50,2);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (4,3,70,4);
 INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (2,4,40,1);
-
-INSERT INTO ShoppingCart (idPerson,idProduct) VALUES (1,1);
-INSERT INTO ShoppingCart (idPerson,idProduct) VALUES (1,7);
-INSERT INTO ShoppingCart (idPerson,idProduct) VALUES (3,3);
-INSERT INTO ShoppingCart (idPerson,idProduct) VALUES (6,4);
-INSERT INTO ShoppingCart (idPerson,idProduct) VALUES (8,2);
 
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (1,1,'2010-04-21',5,NULL,NULL);
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (6,4,'2015-07-30',4.5,NULL,'Produto Maravilhoso, entrega rápida e de qualidade');
