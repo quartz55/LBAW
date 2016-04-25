@@ -5,5 +5,6 @@
         </div>
     </footer>
     </div>
+{include file='common/scripts.tpl'}
 </body>
 </html>

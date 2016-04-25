@@ -8,8 +8,6 @@
  }
 </script>
 
-<aside class="col-sm-2 left-panel">
-</aside>
 <div class="col-sm-8 main-content">
     <div class="row">
         <span class="col-xs-12">
