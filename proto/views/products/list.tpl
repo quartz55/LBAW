@@ -2,7 +2,9 @@
 
 <link rel="stylesheet" href="{$BASE_URL}css/products.css">
 
+
 <script>
+ var BASE_URL = {$BASE_URL}+"";
  function getProductURL(id) {
      return "{$BASE_URL}pages/product.php?id="+id;
  }
@@ -34,17 +36,20 @@
 </div>
 
 <aside class="col-sm-2 right-panel">
-    <div class="search row">
-        <span class="col-xs-12">
-            <h3>Search</h3>
-            <hr>
+    <h3>Search</h3>
+    <hr>
+    <div class="input-group">
+        <input id="search-input" class="form-control input-lg" type="text" placeholder="Search..." style="font-size: 14px;"/>
+        <span class="input-group-btn">
+            <button id="search-btn" class="btn btn-info btn-lg" type="button">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
         </span>
-        <div class="form-group">
-            <span class="col-xs-8"><input type="text" id="searchInput" placeholder="Type here..." class="form-control"></span><span class="col-xs-4"><button type="submit" class="btn btn-default glyphicon glyphicon-search"></button></span>
-        </div>
-        <form class="form-horizontal search-form">
-        </form>
     </div>
 </aside>
 
+
 {include file='common/footer.tpl'}
+
+<script src="{$BASE_URL}js/products.js">
+</script>

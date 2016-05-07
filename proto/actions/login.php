@@ -12,11 +12,11 @@ $password = $_POST['pass'];
 
 $user = canLogin($email, $password);
 if ($user == true) {
-  echo $user;
-  echo $user['name'];
+  $_SESSION['succ_msgs'][] = "Welcome " . $user['name'] . "!";
   $_SESSION['username'] = $user['name'];
 }
 else {
+  $_SESSION['error_msgs'][] = 'Invalid credentials';
   header("Location: " . $_SERVER['HTTP_REFERER']);
   exit;
 }

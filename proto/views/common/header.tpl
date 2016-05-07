@@ -1,5 +1,7 @@
 {include file='common/head.tpl'}
 
+{include file='common/messages.tpl'}
+
 <div class="container site-wrapper">
   <header class="row">
     <div class="col-sm-4">

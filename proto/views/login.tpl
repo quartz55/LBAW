@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="{$BASE_URL}css/login.css">
 
+{include file='common/messages.tpl'}
+
 <div class="container">
     <form class="form-signin" action="{$BASE_URL}actions/login.php" method="post">
       <h2 class="form-signin-heading">Login</h2>

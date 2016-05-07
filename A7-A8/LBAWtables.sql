@@ -128,6 +128,9 @@ CREATE TABLE TagsProducts (
 CREATE INDEX email
 ON Client USING btree(email);
 
+CREATE INDEX product_name ON Product
+USING gin(to_tsvector('english', name));
+
 -- Triggers
 
 -- Trigger responsavel por verificar se adicionar ao ShoppingCart e possivel, comparando a quantidade desejada com o stock
