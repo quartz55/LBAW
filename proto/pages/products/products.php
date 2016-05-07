@@ -9,6 +9,6 @@ else $products = getAllProducts();
 
 $smarty->assign('products', $products);
 
-$smarty->display('products/list.tpl');
+$smarty->display('products/products.tpl');
 
 ?>

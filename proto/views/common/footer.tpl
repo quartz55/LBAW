@@ -1,7 +1,7 @@
     </main>
     <footer class="row">
         <div class="col-xs-12">
-            <h4>LBAW</h4>
+            <span class="h5">LBAW</span>
         </div>
     </footer>
     </div>

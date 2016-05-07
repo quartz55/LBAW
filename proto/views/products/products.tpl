@@ -2,9 +2,8 @@
 
 <link rel="stylesheet" href="{$BASE_URL}css/products.css">
 
-
 <script>
- var BASE_URL = {$BASE_URL}+"";
+ var BASE_URL = "{$BASE_URL}";
  function getProductURL(id) {
      return "{$BASE_URL}pages/product.php?id="+id;
  }
@@ -13,7 +12,7 @@
 <div class="col-sm-8 main-content">
     <div class="row">
         <span class="col-xs-12">
-            <h3>Products List</h3>
+            <span class="h3">Products List</span>
             <hr>
         </span>
     </div>
@@ -26,23 +25,26 @@
                 <span class="price-tag">&euro;{$product.price}</span>
             </span>
             <hr/>
-            <div class="col-sm-3"><img src="http://placehold.it/350x250" class="img-responsive img-rounded product-image" /></div>
+            <div class="col-sm-3">
+                <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" />
+            </div>
             <div class="col-sm-9 product-list-description">
-                <p><b>#{$product.code}</b></p>
-                <p>{$product.description}</p>
+                <b>#{$product.code}</b>
+                <br/>
+                {$product.description}
             </div>
         </article>
     {/foreach}
 </div>
 
 <aside class="col-sm-2 right-panel">
-    <h3>Search</h3>
+    <span class="h3">Search</span>
     <hr>
     <div class="input-group">
-        <input id="search-input" class="form-control input-lg" type="text" placeholder="Search..." style="font-size: 14px;"/>
+        <input id="search-input" class="form-control" type="text" placeholder="Search..."/>
         <span class="input-group-btn">
-            <button id="search-btn" class="btn btn-info btn-lg" type="button">
-                <i class="glyphicon glyphicon-search"></i>
+            <button id="search-btn" class="btn btn-secondary" type="button">
+                <i class="fa fa-search"></i>
             </button>
         </span>
     </div>
