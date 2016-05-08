@@ -10,5 +10,4 @@ else $products = getAllProducts();
 $smarty->assign('products', $products);
 
 $smarty->display('products/products.tpl');
-
 ?>

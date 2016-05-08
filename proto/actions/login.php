@@ -14,6 +14,7 @@ $user = canLogin($email, $password);
 if ($user == true) {
     $_SESSION['succ_msgs'][] = "Welcome " . $user['name'] . "!";
     $_SESSION['username'] = $user['name'];
+    $_SESSION['useremail'] = $email;
 }
 else {
     $_SESSION['error_msgs'][] = 'Invalid credentials';

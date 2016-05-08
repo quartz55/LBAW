@@ -9,11 +9,18 @@
  }
 </script>
 
+<aside class="col-sm-2 left-panel">
+    {if $USERNAME}
+        {include file='common/user-panel.tpl'}
+    {else}
+        {include file='common/guest-panel.tpl'}
+    {/if}
+</aside>
+
 <div class="col-sm-8 main-content">
     <div class="row">
         <span class="col-xs-12">
-            <span class="h3">Products List</span>
-            <hr>
+            <h3>Products List</h3>
         </span>
     </div>
 
@@ -24,7 +31,6 @@
                 <h5 class="product-list-name">{$product.name}</h5>
                 <span class="price-tag">&euro;{$product.price}</span>
             </span>
-            <hr/>
             <div class="col-sm-3">
                 <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" />
             </div>
@@ -38,8 +44,7 @@
 </div>
 
 <aside class="col-sm-2 right-panel">
-    <span class="h3">Search</span>
-    <hr>
+    <h3>Search</h3>
     <div class="input-group">
         <input id="search-input" class="form-control" type="text" placeholder="Search..."/>
         <span class="input-group-btn">
