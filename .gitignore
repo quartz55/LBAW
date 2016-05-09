@@ -1,2 +1,3 @@
 bower_components/
-*.tpl.php
+*config/init.php
+*tmp/

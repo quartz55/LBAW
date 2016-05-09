@@ -1,0 +1,16 @@
+* DONE Error handling
+CLOSED: [2016-05-05 Thu 15:58]
+* TODO Check and edit user profile
+** TODO View profile page
+** TODO Edit profil form
+** TODO Edit profile action
+* DONE Product search
+CLOSED: [2016-05-05 Thu 20:54]
+** DONE Learn full text search implementation
+CLOSED: [2016-05-05 Thu 20:32]
+** DONE GET arguments for products list page
+CLOSED: [2016-05-05 Thu 20:32]
+** DONE Dynamically change listed products and page URL arguments
+CLOSED: [2016-05-05 Thu 20:32]
+** DONE Add FTS to database and PHP query function
+CLOSED: [2016-05-05 Thu 20:54]
