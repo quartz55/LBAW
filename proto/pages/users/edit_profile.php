@@ -11,5 +11,5 @@ if (!isset($_SESSION['useremail'])) {
 $client = getClient($_SESSION['useremail']);
 
 $smarty->assign('client', $client);
-$smarty->display('users/edit_profile.tpl.php');
+$smarty->display('users/edit_profile.tpl');
 ?>
