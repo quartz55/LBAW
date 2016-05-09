@@ -18,19 +18,21 @@ $(function () {
 function updateProducts(new_products) {
     console.log("Updating products");
     console.log(new_products.length);
-    var num_prods = $("#num-products");
-    num_prods.html(num_prods.html().replace(/\d+/g, new_products.length));
-    $(".product").remove();
 
-    var template = '<article class="product row" onclick="window.location.href=getProductURL({$product.idproduct});"> <span class="col-xs-12"> <h5 class="product-list-name">{$product.name}</h5> <span class="price-tag">&euro;{$product.price}</span> </span> <div class="col-sm-3"> <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" /> </div> <div class="col-sm-9 product-list-description"> <b>#{$product.code}</b> <br/> {$product.description} </div> </article>';
-    $.each(new_products, function(i, p) {
-        var product = template;
-        product = product.replace(/\{\$product\.idproduct\}/g, p.idproduct);
-        product = product.replace(/\{\$product\.name\}/g, p.name);
-        product = product.replace(/\{\$product\.price\}/g, p.price);
-        product = product.replace(/\{\$product\.code\}/g, p.code);
-        product = product.replace(/\{\$product\.description\}/g, p.description);
+    $.ajax({
+        url: BASE_URL+"views/products/product-listing.tpl"
+    }).done(function (template) {
+        // Update num products header
+        var num_prods = $("#num-products");
+        num_prods.html(num_prods.html().replace(/\d+/g, new_products.length));
 
-        $(".main-content").append(product);
-    });
+        var smartyjs = new jSmart(template);
+        $(".product").remove();
+        $.each(new_products, function(i, p) {
+            var product = smartyjs.fetch({BASE_URL: BASE_URL, product: p});
+
+            $(".main-content").append(product);
+        });
+    }).fail(function(x, err) { console.error(err); });
+
 }
