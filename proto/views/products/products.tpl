@@ -9,7 +9,7 @@
  }
 </script>
 
-<aside class="col-sm-2 left-panel">
+<aside class="col-sm-6 col-md-2 left-panel">
     {if $USERNAME}
         {include file='common/user-panel.tpl'}
     {else}
@@ -17,12 +17,20 @@
     {/if}
 </aside>
 
-<div class="col-sm-8 main-content">
-    <div class="row">
-        <span class="col-xs-12">
-            <h3>Products List</h3>
+<aside class="col-sm-6 col-md-2 col-md-push-8 right-panel">
+    <h3>Search</h3>
+    <div class="input-group">
+        <input id="search-input" class="form-control" type="text" placeholder="Search..."/>
+        <span class="input-group-btn">
+            <button id="search-btn" class="btn btn-secondary" type="button">
+                <i class="fa fa-search"></i>
+            </button>
         </span>
     </div>
+</aside>
+
+<div class="col-sm-12 col-md-8 col-md-pull-2 main-content">
+    <h3>Products List <span id="num-products" class="text-muted">(Showing {$products|@count} products)</span></h3>
 
     {foreach $products as $product}
         <article class="product row"
@@ -43,17 +51,6 @@
     {/foreach}
 </div>
 
-<aside class="col-sm-2 right-panel">
-    <h3>Search</h3>
-    <div class="input-group">
-        <input id="search-input" class="form-control" type="text" placeholder="Search..."/>
-        <span class="input-group-btn">
-            <button id="search-btn" class="btn btn-secondary" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
-</aside>
 
 
 {include file='common/footer.tpl'}

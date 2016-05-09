@@ -18,9 +18,11 @@ $(function () {
 function updateProducts(new_products) {
     console.log("Updating products");
     console.log(new_products.length);
+    var num_prods = $("#num-products");
+    num_prods.html(num_prods.html().replace(/\d+/g, new_products.length));
     $(".product").remove();
 
-    var template = ' <article class="product row" onclick="window.location.href=getProductURL({$product.idproduct});"> <span class="col-xs-12"> <h5 class="product-list-name">{$product.name}</h5> <span class="price-tag">&euro;{$product.price}</span> </span> <hr/> <div class="col-sm-3"> <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" /> </div> <div class="col-sm-9 product-list-description"> <b>#{$product.code}</b> <br/> {$product.description} </div> </article> ';
+    var template = '<article class="product row" onclick="window.location.href=getProductURL({$product.idproduct});"> <span class="col-xs-12"> <h5 class="product-list-name">{$product.name}</h5> <span class="price-tag">&euro;{$product.price}</span> </span> <div class="col-sm-3"> <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" /> </div> <div class="col-sm-9 product-list-description"> <b>#{$product.code}</b> <br/> {$product.description} </div> </article>';
     $.each(new_products, function(i, p) {
         var product = template;
         product = product.replace(/\{\$product\.idproduct\}/g, p.idproduct);
