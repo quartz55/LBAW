@@ -6,9 +6,9 @@
  var BASE_URL = "{$BASE_URL}";
 </script>
 
-{include file='common/left-panel.tpl'}
+{include file='common/left-panel.tpl' grid_opt='col-md-2 col-sm-4 text-xs-center text-sm-left'}
 
-<aside class="col-sm-6 col-md-2 col-md-push-8 right-panel">
+<aside class="col-sm-8 col-md-2 col-md-push-8 right-panel">
     <h3>Search</h3>
     <div class="input-group">
         <input id="search-input" class="form-control" type="text" placeholder="Search..."/>

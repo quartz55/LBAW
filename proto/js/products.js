@@ -19,20 +19,37 @@ function updateProducts(new_products) {
     console.log("Updating products");
     console.log(new_products.length);
 
+    // Update num products header
+    var num_prods = $("#num-products");
+    num_prods.html(num_prods.html().replace(/\d+/g, new_products.length));
+
+    var tpl, removed = false;
+    var addProducts = function() {
+        if (tpl === undefined || !removed) return;
+
+        $.each(new_products, function(i, p) {
+            var product = tpl.fetch({BASE_URL: BASE_URL, product: p});
+            $(product).hide().appendTo(".main-content").fadeIn();
+        });
+    };
+
+    // Get product template
     $.ajax({
         url: BASE_URL+"views/products/product-listing.tpl"
-    }).done(function (template) {
-        // Update num products header
-        var num_prods = $("#num-products");
-        num_prods.html(num_prods.html().replace(/\d+/g, new_products.length));
-
-        var smartyjs = new jSmart(template);
-        $(".product").remove();
-        $.each(new_products, function(i, p) {
-            var product = smartyjs.fetch({BASE_URL: BASE_URL, product: p});
-
-            $(".main-content").append(product);
-        });
+    }).done(function (data) {
+        tpl = new jSmart(data);
+        addProducts();
     }).fail(function(x, err) { console.error(err); });
 
+    // Remove visible list with fade
+    if (!$(".product").length) removed = true;
+    else $(".product").each(function (i) {
+        $(this).fadeOut(function () {
+            $(this).remove();
+            if (!removed) {
+                removed = true;
+                addProducts();
+            }
+        });
+    });
 }

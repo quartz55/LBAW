@@ -131,6 +131,9 @@ ON Client USING btree(email);
 CREATE INDEX product_name ON Product
 USING gin(to_tsvector('english', name));
 
+CREATE INDEX product_query ON Product
+USING gin(to_tsvector('english', code || ' ' || name || ' ' || description));
+
 -- Triggers
 
 -- Trigger responsavel por verificar se adicionar ao ShoppingCart e possivel, comparando a quantidade desejada com o stock

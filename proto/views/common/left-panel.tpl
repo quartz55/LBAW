@@ -1,4 +1,4 @@
-<aside class="col-sm-6 col-md-2 left-panel">
+<aside class="left-panel {$grid_opt}">
     {if $USERNAME}
         {include file='common/user-panel.tpl'}
     {else}

@@ -8,7 +8,14 @@ header, main, footer {
     border-radius: 4px;
     margin-bottom: 1em;
     box-shadow: 0 0 10px rgb(51, 51, 51);
-    padding: 0.5em 0;
+}
+
+main {
+    padding: 2em 1em;
+}
+
+footer {
+    padding: 1em 0;
 }
 
 .site-wrapper {
