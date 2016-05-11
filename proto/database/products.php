@@ -1,16 +1,16 @@
 <?php
 function getAllProducts() {
     global $conn;
-    $stmt = $conn->prepare('SELECT * FROM Product ORDER BY name ASC');
+    $stmt = $conn->prepare('SELECT P.*, COALESCE(AVG(rating), 0) as rating FROM Product P LEFT JOIN Rate R on P.idProduct = R.idProduct GROUP BY P.idProduct ORDER BY name ASC');
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
 function searchProducts($query) {
     global $conn;
-    // $stmt = $conn->prepare("SELECT * FROM Product WHERE to_tsvector('english', name) @@ to_tsquery('english', ?) ORDER BY name ASC");
-    $stmt = $conn->prepare("SELECT * FROM Product WHERE to_tsvector('english', code || ' ' || name || ' ' || description) @@ to_tsquery('english', ?) ORDER BY name ASC");
+    $stmt = $conn->prepare("SELECT p.*, coalesce(avg(rating),0) as rating FROM Product p LEFT JOIN Rate r on p.idproduct = r.idproduct WHERE to_tsvector('english', p.code || ' ' || p.name || ' ' || p.description) @@ to_tsquery('english', ?) GROUP BY p.idproduct ORDER BY p.name ASC");
     $stmt->execute(array($query));
+
     return $stmt->fetchAll();
 }
 

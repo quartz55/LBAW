@@ -35,7 +35,8 @@ function updateProducts(new_products) {
 
     // Get product template
     $.ajax({
-        url: BASE_URL+"views/products/product-listing.tpl"
+        url: BASE_URL+"views/products/product-listing.tpl",
+        cache: false
     }).done(function (data) {
         tpl = new jSmart(data);
         addProducts();

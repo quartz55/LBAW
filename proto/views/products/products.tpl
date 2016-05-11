@@ -24,7 +24,7 @@
     <h3>Products List <span id="num-products" class="text-muted">(Showing {$products|@count} products)</span></h3>
 
     {foreach $products as $product}
-        {include file='products/product-listing.tpl'}
+        {include file='products/product-listing.tpl' product=$product}
     {/foreach}
 </div>
 
