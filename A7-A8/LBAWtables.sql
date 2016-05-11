@@ -43,7 +43,7 @@ CREATE TABLE Product (
     discount numeric NOT NULL CHECK(discount > 0),
     discountEnd Date,
     featured boolean,
-    description text NOT NULL,
+    description text DEFAULT 'No Description',
 
     PRIMARY KEY(idProduct)
 );
@@ -128,9 +128,7 @@ CREATE TABLE TagsProducts (
 CREATE INDEX email
 ON Client USING btree(email);
 
-CREATE INDEX product_name ON Product
-USING gin(to_tsvector('english', name));
-
+----- FTS
 CREATE INDEX product_query ON Product
 USING gin(to_tsvector('english', code || ' ' || name || ' ' || description));
 

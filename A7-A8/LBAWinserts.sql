@@ -27,15 +27,15 @@ INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,
 INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (23345,'MEN POLO SHIRT',72.00,10,0.3,5,NULL,'no','Men''s piqué short sleeve polo shirt. 100% cotton. Regular fit. Side slits. Franklin&M embroidered on the chest and chest pocket with floral pattern.');
 INSERT INTO Product (code,name,price,stock,weight,discount,discountEnd,featured,description) VALUES (36633,'MEN SLEEVE POLO SHIRT',62.00,10,0.3,5,NULL,'no','Men''s piqué short sleeve polo shirt. 100% cotton. Regular fit. Side slits. Sleeve edges with contrast stripes. F&M label appliquéd on the chest.');
 
-INSERT INTO Person (name,password) VALUES ('Mariotti Mizuna','password');
-INSERT INTO Person (name,password) VALUES ('Carlitos Nicolia','valdagno5');
-INSERT INTO Person (name,password) VALUES ('Joao Almeida','grossoundergroundpvz');
-INSERT INTO Person (name,password) VALUES ('Nuno Pinto','fcpallez');
-INSERT INTO Person (name,password) VALUES ('Admin001','shopadmin001');
-INSERT INTO Person (name,password) VALUES ('Joao Costa','1234567');
-INSERT INTO Person (name,password) VALUES ('Antonio Fonseca','lkashdfrgdgfd');
-INSERT INTO Person (name,password) VALUES ('Joana Tomé','joaninhaFCP');
-INSERT INTO Person (name,password) VALUES ('Tony Madeira','to1234ny');
+INSERT INTO Person (name,password) VALUES ('Mariotti Mizuna','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Carlitos Nicolia','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Joao Almeida','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Nuno Pinto','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Admin001','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Joao Costa','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Antonio Fonseca','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Joana Tomé','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Tony Madeira','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
 
 INSERT INTO Client (idPerson,address,email) VALUES (1,'Rua Carlos Paiao 145','marimizuna@gmail.com');
 INSERT INTO Client (idPerson,address,email) VALUES (2,'Largo Sidonio Pais 27','nicolia@slb.com');
@@ -46,10 +46,7 @@ INSERT INTO Client (idPerson,address,email) VALUES (7,'Rua das mimosas','at2101@
 INSERT INTO Client (idPerson,address,email) VALUES (8,'Avenida Mousinho','joana23@hotmail.com');
 INSERT INTO Client (idPerson,address,email) VALUES (9,'Rua S.Joao','tonyM@hotmail.com');
 
--- INSERT INTO SystemAdministrator (idPerson) VALUES (1);
-INSERT INTO SystemAdministrator (idPerson) VALUES (5);
-
--- INSERT INTO Client (idPerson,address,email) VALUES (5,'Rua S.Joao','tonyM@hotmail.com');
+INSERT INTO SystemAdministrator VALUES ((SELECT idPerson FROM Person WHERE name='Admin001'));
 
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (1,'2010-04-20',1);
 INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (6,'2010-04-20',1);
@@ -78,8 +75,13 @@ INSERT INTO WishList (idPerson,idProduct) VALUES (4,6);
 INSERT INTO WishList (idPerson,idProduct) VALUES (4,2);
 INSERT INTO WishList (idPerson,idProduct) VALUES (6,1);
 
-INSERT INTO Tags (name) VALUES ('Cava');
-
-INSERT INTO TagsProducts (idTags,idProduct) VALUES (1,3);
-
-INSERT INTO SupportTicket (createDate,reason,solveDate,title,idClient,idAdmin,idProduct,idCheckout) VALUES ('2013-05-12','Wrong size','2013-05-14','LRG WAVY BASKETBALL JERSEY',3,5,3,2);
+INSERT INTO Tags (name) VALUES ('jacket');
+INSERT INTO Tags (name) VALUES ('polo');
+INSERT INTO Tags (name) VALUES ('jeans');
+INSERT INTO Tags (name) VALUES ('shirt');
+INSERT INTO Tags (name) VALUES ('pant');
+INSERT INTO Tags (name) VALUES ('tank');
+INSERT INTO Tags (name) VALUES ('t-shirt');
+INSERT INTO Tags (name) VALUES ('jersey');
+INSERT INTO Tags (name) VALUES ('hood');
+INSERT INTO Tags (name) VALUES ('lrg');
