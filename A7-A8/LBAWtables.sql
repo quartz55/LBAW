@@ -129,8 +129,24 @@ CREATE INDEX email
 ON Client USING btree(email);
 
 ----- FTS
-CREATE INDEX product_query ON Product
-USING gin(to_tsvector('english', code || ' ' || name || ' ' || description));
+ALTER TABLE Product ADD COLUMN tsv tsvector;
+
+CREATE OR REPLACE FUNCTION product_gen_tsvector() RETURNS TRIGGER AS $$
+BEGIN
+  NEW.tsv :=
+          setweight(to_tsvector('english', COALESCE(NEW.code||'', '')), 'A') ||
+          setweight(to_tsvector('english', COALESCE(NEW.name,'')), 'B') ||
+          setweight(to_tsvector('english', COALESCE(NEW.description,'')), 'C');
+  RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER upsert_products_tsv
+BEFORE INSERT OR UPDATE ON Product
+FOR EACH ROW
+EXECUTE PROCEDURE product_gen_tsvector();
+
+CREATE INDEX product_tsv_idx ON Product USING gin(tsv);
 
 -- Triggers
 

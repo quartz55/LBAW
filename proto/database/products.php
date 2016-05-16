@@ -7,9 +7,18 @@ function getAllProducts() {
 }
 
 function searchProducts($query) {
+    // Sanitize query
+    $s_query = preg_replace('/\s+(?=([^"]*"[^"]*")*[^"]*$)/', '|', $query);
+    $s_query = preg_replace('/"(.*?)"/', '($1)', $s_query);
+    $s_query = preg_replace('/\s+/', '&', $s_query);
+
     global $conn;
-    $stmt = $conn->prepare("SELECT p.*, coalesce(avg(rating),0) as rating FROM Product p LEFT JOIN Rate r on p.idproduct = r.idproduct WHERE to_tsvector('english', p.code || ' ' || p.name || ' ' || p.description) @@ to_tsquery('english', ?) GROUP BY p.idproduct ORDER BY p.name ASC");
-    $stmt->execute(array($query));
+    $stmt = $conn->prepare("SELECT P.*, COALESCE(AVG(rating), 0) AS Rating
+FROM Product P LEFT JOIN Rate R ON R.idProduct = P.idProduct, to_tsquery(?) query
+WHERE query @@ P.tsv
+GROUP BY P.idProduct, query
+ORDER BY ts_rank(P.tsv, query) DESC");
+    $stmt->execute(array($s_query));
 
     return $stmt->fetchAll();
 }
