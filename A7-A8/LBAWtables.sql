@@ -252,3 +252,60 @@ CREATE TRIGGER checkIDClient
 BEFORE INSERT OR UPDATE ON Client
 FOR EACH ROW
 EXECUTE PROCEDURE checkIDClient();
+
+--verifica se o preço e o correto
+CREATE OR REPLACE FUNCTION checkPurchasePrice() RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.price != (SELECT price FROM Product where idProduct = (SELECT idProduct FROM ShoppingCart
+  WHERE idPerson IN
+  (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout))) *
+  ((SELECT quantity FROM ShoppingCart WHERE idPerson IN
+  (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout) AND
+idProduct = NEW.idProduct))
+ THEN
+	RAISE EXCEPTION 'invalid price';
+END IF;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER checkPrice
+BEFORE INSERT OR UPDATE ON Purchase
+FOR EACH ROW
+EXECUTE PROCEDURE checkPurchasePrice();
+
+
+-- So é possivel fazer checkout se a pessoa tiver produtos no carrinho
+CREATE OR REPLACE FUNCTION checkProducts() RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.idPerson NOT IN (SELECT idPerson FROM ShoppingCart)
+ THEN
+	RAISE EXCEPTION 'impossivel checkout';
+END IF;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER checkProducts
+BEFORE INSERT OR UPDATE ON Checkout
+FOR EACH ROW
+EXECUTE PROCEDURE checkProducts();
+
+-- Aumenta o stock depois de apagar shoppingcart
+CREATE OR REPLACE FUNCTION updateStock() RETURNS TRIGGER AS $$
+BEGIN
+  IF OLD.idProduct IN (SELECT idProduct FROM Product)
+ THEN
+	UPDATE Product SET stock = stock + OLD.quantity WHERE OLD.idProduct=idProduct; 
+END IF;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER updateStock
+AFTER DELETE ON ShoppingCart
+FOR EACH ROW
+EXECUTE PROCEDURE updateStock();
