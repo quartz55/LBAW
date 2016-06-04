@@ -162,27 +162,38 @@ END;
 $$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER checkStock
-BEFORE INSERT OR UPDATE ON ShoppingCart
-FOR EACH ROW
-EXECUTE PROCEDURE checkStock();
-
 -- Trigger responsavel por decrementar o stock apos adicionar ao ShoppingCart
-CREATE OR REPLACE FUNCTION decStock() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION decStock_ins() RETURNS TRIGGER AS $$
+DECLARE
+  ammount integer := NEW.quantity;
 BEGIN
   UPDATE Product
-  SET stock = ((SELECT stock FROM Product WHERE
-  NEW.idProduct = idProduct) - NEW.quantity)
-  WHERE NEW.idProduct = idProduct;
+  SET stock = stock - ammount
+  WHERE idProduct = NEW.idProduct;
   RETURN NEW;
 END;
-$$
-LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER decStock
+CREATE OR REPLACE FUNCTION decStock_up() RETURNS TRIGGER AS $$
+DECLARE
+ammount integer := NEW.quantity-OLD.quantity;
+BEGIN
+  UPDATE Product
+  SET stock = stock - ammount
+  WHERE idProduct = NEW.idProduct;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER decStock_ins
 AFTER INSERT ON ShoppingCart
 FOR EACH ROW
-EXECUTE PROCEDURE decStock();
+EXECUTE PROCEDURE decStock_ins();
+
+CREATE TRIGGER decStock_up
+AFTER UPDATE ON ShoppingCart
+FOR EACH ROW
+EXECUTE PROCEDURE decStock_up();
 
 -- So e possivel fazer uma compra caso o produto tiver no carrinho, se tiver a quantidade e é apagado
 CREATE OR REPLACE FUNCTION purchaseIsPossible() RETURNS TRIGGER AS $$

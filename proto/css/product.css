@@ -1,6 +1,59 @@
-h3 {
-    /* border-bottom: 1px solid black; */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
-.price-tag {
-    margin-right: 1em;
+
+#add-to-cart-qty {
+    text-align: center;
+    margin: 0;
+    min-width: 2.5em!important;
+    max-width: 100%;
+    width: 2.5em;
+    transition: width .3s ease;
+}
+
+.product-info {
+    margin-bottom: 2em;
+}
+
+.reviews-avg {
+    font-size: 300%;
+}
+
+.reviews-avg-stars {
+    color: #666;
+    margin-top: -0.4em;
+    margin-bottom: 0.2em;
+}
+
+.reviews-total-reviews {
+    color: #666;
+}
+
+.reviews {
+    padding-left: 0;
+}
+
+.review {
+    border-left: 2px solid #ccc;
+    padding-left: 1em;
+    padding-bottom: 1em;
+}
+
+.review:last-child {
+    padding-bottom: 0;
+}
+
+.review-header > .review-rating{
+    font-size: 80%;
+    margin-right: 0.5em;
+}
+
+.review-user {
+    margin-top: -0.3em;
+}
+
+.review-description {
+    margin-top: 0.5em;
 }
