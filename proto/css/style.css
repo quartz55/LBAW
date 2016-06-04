@@ -50,7 +50,16 @@ header .nav-item a:hover {
     color: rgb(0, 36, 100);
 }
 
-header .shopping-cart {
+header .shopping-cart:link {
+    text-decoration: none;
+    color: black;
+}
+
+header .shopping-cart:hover{
+    color: black;
+}
+
+header .shopping-cart:visited{
     color: black;
 }
 

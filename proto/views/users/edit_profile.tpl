@@ -1,5 +1,6 @@
-{include file='common/header.tpl'}
+{extends 'common/layout.tpl'}
 
+{block name=content}
 <div class="col-xs-12 main-content">
     <h3>Edit Profile</h3>
     <form action="{$BASE_URL}actions/edit_profile.php" method="POST">
@@ -49,5 +50,4 @@
         <a class="btn btn-secondary" href="{$BASE_URL}pages/users/profile.php">Cancel</a>
     </form>
 </div>
-
-{include file='common/footer.tpl'}
+{/block}

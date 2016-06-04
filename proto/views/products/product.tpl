@@ -14,8 +14,10 @@
 {/for}
 {/function}
 
-{include file='common/header.tpl'}
 
+{extends 'common/layout.tpl'}
+
+{block name=content}
 <link href="{$BASE_URL}css/product.css" rel="stylesheet"/>
 
 {include file='common/left-panel.tpl' grid_opt="col-md-2 text-xs-center"}
@@ -29,7 +31,7 @@
         <div class="form-group">
             <span class="price-tag form-control">€{$product.price}</span>
             <div class="input-group add-to-cart">
-                <input name="quantity" class="form-control" id="add-to-cart-qty" type="number" min="1" max="{$product.stock}" step="1" value="1"/>
+                <input name="quantity" class="form-control" id="add-to-cart-qty" type="number" min="1" max="{$product.stock}" step="1" value="1" required/>
                 <span class="input-group-btn">
                     <button type="submit" class="add-to-cart-btn btn btn-warning">
                         <i class="fa fa-shopping-cart"></i> Add to cart</button>
@@ -87,9 +89,6 @@
     <!-- END REVIEWS -->
 </div>
 
-
-
-{include file='common/footer.tpl'}
-
 <script src="{$BASE_URL}js/product.js">
 </script>
+{/block}

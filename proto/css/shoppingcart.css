@@ -1,0 +1,38 @@
+h3 {
+    margin-bottom: 1em;
+}
+
+a.product-link:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  background: rgb(199, 199, 199);
+  background: rgba(0,0,0,0.1);
+  transition: background 0s;
+}
+
+a.product-link {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5em;
+  transition: background 0.3s;
+}
+
+a.product-link .product-list-name{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.remove-item-btn {
+    color: red;
+    text-decoration: none;
+}
+
+.remove-item-btn:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.product-link img {
+    max-height: 30px;
+    margin-right: 1em;
+}

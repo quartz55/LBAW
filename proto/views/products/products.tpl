@@ -1,5 +1,6 @@
-{include file='common/header.tpl'}
+{extends 'common/layout.tpl'}
 
+{block name=content}
 <link rel="stylesheet" href="{$BASE_URL}css/products.css">
 
 <script>
@@ -28,7 +29,6 @@
     {/foreach}
 </div>
 
-{include file='common/footer.tpl'}
-
 <script src="{$BASE_URL}js/smart.min.js"></script>
 <script src="{$BASE_URL}js/products.js"></script>
+{/block}

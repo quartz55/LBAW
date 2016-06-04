@@ -1,4 +1,26 @@
 <?php
+
+function getProductPrice($product) {
+    if ($product.discountend != null && new DateTime("2018-05-15") > new DateTime()) {
+        $dis_price = (float)$product['discount'] * (float)$product['price'];
+        return (float)$product['discount']/100 * (float)$product['price'];
+    } else return (float)$product['price'];
+}
+
+function getFeatured() {
+    global $conn;
+    $stmt = $conn->prepare('SELECT * FROM Product WHERE featured = TRUE ORDER BY RANDOM() LIMIT 3');
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getDiscounts() {
+    global $conn;
+    $stmt = $conn->prepare('SELECT * FROM Product WHere discountEnd > CURRENT_DATE ORDER BY discountEnd ASC LIMIT 3');
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 function getAllProducts() {
     global $conn;
     $stmt = $conn->prepare('SELECT P.*, COALESCE(AVG(rating), 0) as rating FROM Product P LEFT JOIN Rate R on P.idProduct = R.idProduct GROUP BY P.idProduct ORDER BY name ASC');

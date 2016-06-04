@@ -1,5 +1,6 @@
-{include file='common/header.tpl'}
+{extends 'common/layout.tpl'}
 
+{block name=content}
 <div class="col-sm-8 main-content">
     <h3>{$USERNAME} Profile</h3>
     <ul class="list-group">
@@ -27,4 +28,4 @@
     <spa class="label label-danger">TODO</spa>
 </aside>
 
-{include file='common/footer.tpl'}
+{/block}

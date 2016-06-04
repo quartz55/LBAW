@@ -1,0 +1,26 @@
+.product-card .discount-ammount {
+    font-size: 120%;
+    color: red;
+    vertical-align: middle;
+    margin-left: 0.3em;
+}
+
+.product-card {
+    transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+    box-shadow: 0 0 30px 10px rgba(32,32,32,0.2);
+    display: block;
+    /* cursor: pointer; */
+}
+
+a.product-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.product-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
