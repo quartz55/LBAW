@@ -34,6 +34,14 @@ a.product-link {
     margin-bottom: 0;
 }
 
+.discount-ammount {
+    font-size: 120%;
+    color: red;
+    vertical-align: middle;
+    margin-top: 0.1em;
+    margin-left: 0.3em;
+}
+
 .right-panel {
     margin-bottom: 1em;
 }

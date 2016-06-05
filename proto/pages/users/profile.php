@@ -1,6 +1,7 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR . "database/users.php");
+include_once($BASE_DIR . "database/purchases.php");
 
 if (!isset($_SESSION['useremail'])) {
     $_SESSION['error_msgs'][] = "Unauthorized access";
@@ -10,6 +11,7 @@ if (!isset($_SESSION['useremail'])) {
 
 $client = getClient($_SESSION['useremail']);
 
+$smarty->assign('recent', getRecentPurchases($client['idperson']));
 $smarty->assign('client', $client);
 $smarty->display('users/profile.tpl');
 ?>

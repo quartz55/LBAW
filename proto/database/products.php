@@ -3,7 +3,7 @@
 function getProductPrice($product) {
     if ($product.discountend != null && new DateTime("2018-05-15") > new DateTime()) {
         $dis_price = (float)$product['discount'] * (float)$product['price'];
-        return (float)$product['discount']/100 * (float)$product['price'];
+        return (1 - (float)$product['discount']/100) * (float)$product['price'];
     } else return (float)$product['price'];
 }
 

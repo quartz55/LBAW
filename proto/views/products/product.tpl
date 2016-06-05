@@ -29,7 +29,12 @@
     <form action="{$BASE_URL}actions/add_to_cart.php" method="POST" class="form-inline m-b-1">
         <input name="id" type="hidden" value="{$product.idproduct}"/>
         <div class="form-group">
-            <span class="price-tag form-control">€{$product.price}</span>
+            {$price = getProductPrice($product)}
+            {$discount = price != $product['price']}
+            <span class="price-tag form-control">€{$price}</span>
+            {if $discount}
+                <span class="discount-ammount">-{$product['discount']}%</span>
+            {/if}
             <div class="input-group add-to-cart">
                 <input name="quantity" class="form-control" id="add-to-cart-qty" type="number" min="1" max="{$product.stock}" step="1" value="1" required/>
                 <span class="input-group-btn">

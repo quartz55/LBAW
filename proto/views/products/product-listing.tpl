@@ -19,7 +19,12 @@
         <div class="col-xs-12 product-wrapper">
             <div class="col-xs-12 product-list-header">
                 <span class="product-list-name">{$product.name} <small class="label label-default">#{$product.code}</small></span>
-                <span class="price-tag pull-right">&euro;{$product.price}</span>
+                {$price = getProductPrice($product)}
+                {$discount = price != $product['price']}
+                {if $discount}
+                    <small class="pull-right discount-ammount">-{$product['discount']}%</small>
+                {/if}
+                <span class="price-tag pull-right">&euro;{$price}</span>
             </div>
             <div class="col-sm-3">
                 <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" />

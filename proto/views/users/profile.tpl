@@ -25,7 +25,17 @@
 
 <aside class="col-sm-4 right-panel">
     <h3>Recent Purchases</h3>
-    <spa class="label label-danger">TODO</spa>
+    {foreach $recent as $purchase}
+        <a href="{$BASE_URL}pages/products/product.php?id={$purchase['idproduct']}" class="product-card-link">
+            <div class="card product-card text-xs-center">
+                <!-- <img class="card-img-top img-fluid" alt="Product Image" src="http://placehold.it/350x250"/> -->
+                <div class="card-block">
+                    <h4 class="card-title">{$purchase.name}</h4>
+                    <span class="price-tag">€{$purchase['rprice']}</span>
+                </div>
+            </div>
+        </a>
+    {/foreach}
 </aside>
 
 {/block}
