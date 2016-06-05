@@ -311,3 +311,21 @@ CREATE TRIGGER updateStock
 AFTER DELETE ON ShoppingCart
 FOR EACH ROW
 EXECUTE PROCEDURE updateStock();
+
+-- verifica se possivel fazer rate
+CREATE OR REPLACE FUNCTION checkRate() RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.idPerson NOT IN (SELECT idPerson FROM Checkout WHERE idCheckout IN (SELECT idCheckout 
+FROM Purchase WHERE idProduct = NEW.idProduct))
+ THEN
+	RAISE EXCEPTION 'impossivel Rate';
+END IF;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER checkRate
+BEFORE INSERT OR UPDATE ON Rate
+FOR EACH ROW
+EXECUTE PROCEDURE checkRate();
