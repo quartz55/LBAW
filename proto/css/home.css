@@ -6,11 +6,12 @@
 }
 
 .product-card {
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s,transform 0.2s;
 }
 
 .product-card:hover {
-    box-shadow: 0 0 30px 10px rgba(32,32,32,0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px 10px rgba(32,32,32,0.05);
     display: block;
     /* cursor: pointer; */
 }

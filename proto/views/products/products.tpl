@@ -29,6 +29,9 @@
     {/foreach}
 </div>
 
-<script src="{$BASE_URL}js/smart.min.js"></script>
-<script src="{$BASE_URL}js/products.js"></script>
+{/block}
+
+{block name=scripts}
+    <script src="{$BASE_URL}js/smart.min.js"></script>
+    <script src="{$BASE_URL}js/products.js"></script>
 {/block}

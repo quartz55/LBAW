@@ -1,5 +1,12 @@
 <?php
 
+function clearShoppingCart($user) {
+    global $conn;
+    $stmt = $conn->prepare('DELETE FROM ShoppingCart WHERE idPerson=?');
+    $stmt->execute(array($user));
+    return $stmt->fetch();
+}
+
 function getShoppingCartProducts($user) {
     global $conn;
     $stmt = $conn->prepare('SELECT * FROM ShoppingCart JOIN Product USING (idProduct) WHERE idPerson=?');

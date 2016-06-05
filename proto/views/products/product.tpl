@@ -26,22 +26,27 @@
     <h3>{$product.name} <small class="label label-default">#{$product.code}</small></h3>
 
     <!-- TOOLBAR -->
-    <form action="{$BASE_URL}actions/add_to_cart.php" method="POST" class="form-inline m-b-1">
+    <form action="{$BASE_URL}actions/add-to-cart.php" method="POST" class="form-inline m-b-1">
         <input name="id" type="hidden" value="{$product.idproduct}"/>
         <div class="form-group">
             {$price = getProductPrice($product)}
-            {$discount = price != $product['price']}
+            {$discount = $price != $product['price']}
             <span class="price-tag form-control">€{$price}</span>
             {if $discount}
                 <span class="discount-ammount">-{$product['discount']}%</span>
             {/if}
-            <div class="input-group add-to-cart">
-                <input name="quantity" class="form-control" id="add-to-cart-qty" type="number" min="1" max="{$product.stock}" step="1" value="1" required/>
-                <span class="input-group-btn">
-                    <button type="submit" class="add-to-cart-btn btn btn-warning">
-                        <i class="fa fa-shopping-cart"></i> Add to cart</button>
-                </span>
-            </div>
+            {if $product['stock'] > 0}
+                <div class="input-group add-to-cart">
+                    <input name="quantity" class="form-control" id="add-to-cart-qty" type="number" min="1" max="{$product.stock}" step="1" value="1" required/>
+                    <span class="input-group-btn">
+                        <button type="submit" class="add-to-cart-btn btn btn-warning">
+                            <i class="fa fa-shopping-cart"></i> Add to cart</button>
+                    </span>
+                </div>
+                <span class="h6 text-muted">{$product.stock} in stock</span>
+            {else}
+                <span class="h5 text-danger">Out of stock</span>
+            {/if}
         </div>
     </form>
     <!-- END TOOLBAR -->
@@ -93,7 +98,8 @@
     </div>
     <!-- END REVIEWS -->
 </div>
+{/block}
 
-<script src="{$BASE_URL}js/product.js">
-</script>
+{block name=scripts}
+    <script src="{$BASE_URL}js/product.js"></script>
 {/block}

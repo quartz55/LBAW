@@ -51,7 +51,7 @@ CREATE TABLE Product (
 CREATE TABLE Rate (
     idPerson integer NOT NULL REFERENCES Client(idPerson),
     idProduct integer NOT NULL REFERENCES Product(idProduct),
-    date date NOT NULL,
+    date timestamp NOT NULL,
     rating numeric NOT NULL CHECK(rating >= 0 AND rating <= 5),
     title text,
     description text,
@@ -69,7 +69,7 @@ CREATE TABLE ShoppingCart (
 
 CREATE TABLE Checkout (
     idCheckout SERIAL NOT NULL,
-    date Date NOT NULL,
+    date timestamp NOT NULL,
     idPerson integer NOT NULL,
     CONSTRAINT fk_Client FOREIGN KEY(idPerson) REFERENCES Client(idPerson),
 
@@ -89,7 +89,7 @@ CREATE TABLE SupportTicket (
     idSupportTicket SERIAL NOT NULL,
     createDate date NOT NULL,
     reason text NOT NULL,
-    solveDate date CHECK(solveDate > createDate),
+    solveDate date CHECK(solveDate >= createDate),
     title text NOT NULL,
     idClient integer NOT NULL,
     idAdmin integer NOT NULL,
@@ -207,6 +207,7 @@ idProduct = NEW.idProduct))
   THEN
   DELETE FROM ShoppingCart WHERE idProduct = NEW.idProduct AND
   idPerson=(SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout);
+  UPDATE Product SET stock = stock - NEW.quantity WHERE idProduct = NEW.idProduct;
   ELSE
   RAISE EXCEPTION 'purchase isnt possible';
   END IF;
@@ -215,7 +216,7 @@ END;
 $$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER purchaseIsPossiblel
+CREATE TRIGGER purchaseIsPossible_trg
 BEFORE INSERT ON Purchase
 FOR EACH ROW
 EXECUTE PROCEDURE purchaseIsPossible();
@@ -254,26 +255,28 @@ FOR EACH ROW
 EXECUTE PROCEDURE checkIDClient();
 
 --verifica se o preço e o correto
-CREATE OR REPLACE FUNCTION checkPurchasePrice() RETURNS TRIGGER AS $$
-BEGIN
-  IF NEW.price != (SELECT price FROM Product where idProduct = (SELECT idProduct FROM ShoppingCart
-  WHERE idPerson IN
-  (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout))) *
-  ((SELECT quantity FROM ShoppingCart WHERE idPerson IN
-  (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout) AND
-idProduct = NEW.idProduct))
- THEN
-	RAISE EXCEPTION 'invalid price';
-END IF;
-  RETURN NEW;
-END;
-$$
-LANGUAGE plpgsql;
+-- Nao é bem assim pois pode haver um desconto
 
-CREATE TRIGGER checkPrice
-BEFORE INSERT OR UPDATE ON Purchase
-FOR EACH ROW
-EXECUTE PROCEDURE checkPurchasePrice();
+-- CREATE OR REPLACE FUNCTION checkPurchasePrice() RETURNS TRIGGER AS $$
+-- BEGIN
+--   IF NEW.price != (SELECT price FROM Product where idProduct = (SELECT idProduct FROM ShoppingCart
+--   WHERE idPerson IN
+--   (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout))) *
+--   ((SELECT quantity FROM ShoppingCart WHERE idPerson IN
+--   (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout) AND
+-- idProduct = NEW.idProduct))
+--  THEN
+-- 	RAISE EXCEPTION 'invalid price';
+-- END IF;
+--   RETURN NEW;
+-- END;
+-- $$
+-- LANGUAGE plpgsql;
+
+-- CREATE TRIGGER checkPrice
+-- BEFORE INSERT OR UPDATE ON Purchase
+-- FOR EACH ROW
+-- EXECUTE PROCEDURE checkPurchasePrice();
 
 
 -- So é possivel fazer checkout se a pessoa tiver produtos no carrinho

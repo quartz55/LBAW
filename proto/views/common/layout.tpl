@@ -39,5 +39,7 @@
     </footer>
 </div>
 {include file='common/scripts.tpl'}
+{block name=scripts}
+{/block}
 </body>
 </html>

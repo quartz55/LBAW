@@ -48,29 +48,6 @@ INSERT INTO Client (idPerson,address,email) VALUES (9,'Rua S.Joao','tonyM@hotmai
 
 INSERT INTO SystemAdministrator VALUES ((SELECT idPerson FROM Person WHERE name='Admin001'));
 
-INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (3,3,2);
-INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (6,4,4);
-INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (8,2,1);
-
---DELETE FROM ShoppingCart WHERE idPerson=8;
-
-INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (1,'2010-04-20',1);
-INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (6,'2010-04-20',1);
-INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (2,'2010-04-20',3);
-INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (3,'2015-07-20',6);
-INSERT INTO Checkout (idCheckout,date,idPerson) VALUES (4,'2013-07-23',8);
-
---Updated upstream
---INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (1,1,21);
---INSERT INTO ShoppingCart (idPerson,idProduct,quantity) VALUES (1,7,1);
-
-INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (1,1,59.25,21);
-INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (6,6,59.25,1);
-INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (3,2,118,2);
---Stashed changes
-INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (4,3,128,4);
-INSERT INTO Purchase (idProduct,idCheckout,price,quantity) VALUES (2,4,40,1);
-
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (1,1,'2010-04-21',5,NULL,NULL);
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (6,4,'2015-07-30',4.5,NULL,'Fast delivery,quality assured. Wonderful product');
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (8,2,'2013-08-2',4.5,NULL,'Excellent service, product in perfect conditions, high professionalism.');

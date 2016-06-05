@@ -7,7 +7,7 @@
 
     {function name=product_card}
     {$price = getProductPrice($product)}
-    {$discount = price != $product['price']}
+    {$discount = $price != $product['price']}
 
     <a href="{$BASE_URL}pages/products/product.php?id={$product['idproduct']}" class="product-card-link">
         <div class="card product-card text-xs-center">

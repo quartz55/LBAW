@@ -22,19 +22,24 @@ $quantity = $_POST['quantity'];
 $exists = getCartProduct($user, $product);
 if (!empty($exists)) {
     $new_quantity = $quantity + $exists['quantity'];
+    if (isset($_POST['noadd'])) $new_quantity = $quantity;
     try {
         updateCartQuantity($user, $product, $new_quantity);
+        $_SESSION['succ_msgs'][] = "Quantity updated";
+    }
+    catch (PDOException $e) {
+        $_SESSION['error_msgs'][] = $e->getMessage();
+    }
+} else if (!isset($_POST['noadd'])){
+    try {
+        addToShoppingCart($user, $product, $quantity);
+        $_SESSION['succ_msgs'][] = "Added to cart";
     }
     catch (PDOException $e) {
         $_SESSION['error_msgs'][] = $e->getMessage();
     }
 } else {
-    try {
-        addToShoppingCart($user, $product, $quantity);
-    }
-    catch (PDOException $e) {
-        $_SESSION['error_msgs'][] = $e->getMessage();
-    }
+    $_SESSION['error_msgs'][] = "Invalid operation";
 }
 
 header("Location: ".$_SERVER['HTTP_REFERER']);

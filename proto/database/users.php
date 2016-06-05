@@ -22,7 +22,6 @@ function registerClient($email, $name, $pass, $addr) {
       $stmt = $conn->prepare("INSERT INTO person (name, password) VALUES (?, ?)");
       $stmt->execute(array($name, sha1($pass)));
       $id = $conn->lastInsertId('person_idperson_seq');
-      var_dump($id);
       $stmt = $conn->prepare("INSERT INTO client VALUES (?, ?, ?)");
       $stmt->execute(array($id, $addr, $email));
 

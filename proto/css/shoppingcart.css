@@ -22,17 +22,41 @@ a.product-link .product-list-name{
     vertical-align: middle;
 }
 
-.remove-item-btn {
+a.remove-item-btn {
+    display: inline-block;
+    float: none;
+    /* margin-top: 0.5em; */
+    vertical-align: middle;
+    font-size: 200%;
     color: red;
     text-decoration: none;
 }
 
-.remove-item-btn:hover {
-    color: red;
+a.remove-item-btn:hover {
+    color: rgb(255, 100, 100);
     text-decoration: none;
 }
 
 .product-link img {
     max-height: 30px;
     margin-right: 1em;
+}
+
+.cart-toolbar {
+    margin-top: 0.5em;
+}
+
+.clearcart-btn {
+    margin-left: 0.2em;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.prod-qty {
+    text-align: center;
+    max-width: 3em;
 }

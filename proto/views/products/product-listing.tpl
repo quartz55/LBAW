@@ -14,15 +14,23 @@
 {/for}
 {/function}
 
+{if ($product['discountend'] != null && $smarty.now-$product['discountend']|strtotime > 0)}
+    {$price = (1 - (float)$product['discount']/100) * (float)$product['price']}
+{else}
+    {$price = (float)$product['price']}
+{/if}
+
 <article class="product row">
     <a class="product-link" href="{$BASE_URL}pages/products/product.php?id={$product.idproduct}">
         <div class="col-xs-12 product-wrapper">
             <div class="col-xs-12 product-list-header">
                 <span class="product-list-name">{$product.name} <small class="label label-default">#{$product.code}</small></span>
-                {$price = getProductPrice($product)}
-                {$discount = price != $product['price']}
+                {if $product['stock'] <= 0}
+                <span class="text-danger">Out of stock!</span>
+                {/if}
+                {$discount = $price != $product['price']}
                 {if $discount}
-                    <small class="pull-right discount-ammount">-{$product['discount']}%</small>
+                    <small class="pull-right text-danger discount-ammount">-{$product['discount']}%</small>
                 {/if}
                 <span class="price-tag pull-right">&euro;{$price}</span>
             </div>
@@ -31,7 +39,9 @@
             </div>
             <div class="col-sm-9 product-list-description">
                 <div class="product-list-rating">
-                    {call stars rating=$product.rating}
+                    {if $product['rating'] != 0}
+                        {call stars rating=$product.rating}
+                    {/if}
                 </div>
                 {$product.description}
             </div>
