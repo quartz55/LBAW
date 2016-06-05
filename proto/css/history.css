@@ -1,0 +1,34 @@
+.purchase-link {
+    text-decoration: none;
+    color: inherit;
+}
+.purchase-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.purchase {
+    transition: 0.3s;
+    padding: 0.5em;
+}
+
+.purchase-name {
+    margin-left: 1em;
+}
+
+.purchase:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    background: rgb(199, 199, 199);
+    background: rgba(0,0,0,0.1);
+}
+
+.purchase-img {
+    max-height: 50px;
+}
+
+.price-tag {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    float: right;
+}

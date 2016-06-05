@@ -12,7 +12,7 @@
             <a class="nav-link" href="#">Wishlist</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Purchase History</a>
+            <a class="nav-link" href="{$BASE_URL}pages/users/history.php">Purchase History</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{$BASE_URL}pages/users/edit_profile.php">Edit Profile</a>

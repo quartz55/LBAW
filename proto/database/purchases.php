@@ -9,7 +9,7 @@ function getRecentPurchases($user) {
 
     function getPurchaseHistory($user) {
 global $conn;
-$stmt = $conn->prepare("SELECT Product.*, date, Purchase.price as rprice FROM checkout JOIN purchase USING (idcheckout) JOIN product using (idproduct) WHERE idperson = ? ORDER BY date DESC GROUP BY idcheckout");
+$stmt = $conn->prepare("SELECT Product.*, date, Purchase.price as rprice FROM checkout JOIN purchase USING (idcheckout) JOIN product using (idproduct) WHERE idperson = ? ORDER BY date DESC");
 $stmt->execute(array($user));
 return $stmt->fetchAll();
 }
