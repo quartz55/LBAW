@@ -205,6 +205,8 @@ BEGIN
   (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout) AND
 idProduct = NEW.idProduct))
   THEN
+   UPDATE Product SET stock = stock - (SELECT quantity FROM ShoppingCart WHERE idProduct = NEW.idProduct AND idPerson=(SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout))
+WHERE idProduct = NEW.idProduct;
   DELETE FROM ShoppingCart WHERE idProduct = NEW.idProduct AND
   idPerson=(SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout);
   ELSE
