@@ -97,6 +97,39 @@
         </div>
     </div>
     <!-- END REVIEWS -->
+
+    <!-- ADD REVIEW -->
+    {if $can_review}
+        <div id="add-review" class="row add-review">
+            <div class="col-xs-12">
+                <h4 class="text-muted">Add a review</h4>
+            </div>
+            <form action="{$BASE_URL}actions/add-review.php" method="POST" class="col-xs-12">
+                <input name="product" type="hidden" value="{$product['idproduct']}"/>
+                <fieldset class="form-group">
+                    <select class="form-control" name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input class="form-control" name="title" type="text" placeholder="Review Title" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <textarea class="form-control" cols="30" id="" name="description" rows="3" placeholder="Review Description"></textarea>
+                </fieldset>
+                <button class="btn btn-secondary">Add Review</button>
+            </form>
+            {* {else}
+               <div class="col-xs-12">
+               <h4 class="text-muted">Only buyers can review</h4>
+               </div> *}
+        </div>
+    {/if}
+    <!-- END ADD REVIEW -->
 </div>
 {/block}
 

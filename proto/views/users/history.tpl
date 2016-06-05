@@ -3,14 +3,14 @@
 {block name=content}
 <link rel="stylesheet" href="{$BASE_URL}css/history.css">
 
-{include file='common/left-panel.tpl' grid_opt='col-md-2 col-sm-12 text-xs-center text-sm-left'}
+{include file='common/left-panel.tpl' grid_opt='col-md-2 col-sm-12 text-xs-center'}
 
 <div class="col-sm-12 col-md-10 main-content">
     <h3>Purchase History</h3>
 
     {if count($purchases) == 0}
             <h4 class="text-muted">You have no previous purchases</h4>
-    {/if\}
+    {/if}
 
     {$currDate = null}
     {foreach $purchases as $purchase}

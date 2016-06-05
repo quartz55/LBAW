@@ -7,7 +7,7 @@
  var BASE_URL = "{$BASE_URL}";
 </script>
 
-{include file='common/left-panel.tpl' grid_opt='col-md-2 col-sm-4 text-xs-center text-sm-left'}
+{include file='common/left-panel.tpl' grid_opt='col-md-2 col-sm-4 text-xs-center'}
 
 <aside class="col-sm-8 col-md-2 col-md-push-8 right-panel">
     <h3>Search</h3>

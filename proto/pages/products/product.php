@@ -1,6 +1,7 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR.'database/products.php');
+include_once($BASE_DIR.'database/reviews.php');
 
 if (!isset($_GET['id'])) {
     $_SESSION['error_msgs'][] = "Invalid access";
@@ -15,8 +16,12 @@ if (empty($product)) {
     exit;
 }
 
-$reviews = getProductReviews($_GET['id']);
+$reviews = getReviews($_GET['id']);
 
+if (isset($_SESSION['useremail'])) {
+    $client = getClient($_SESSION['useremail'])['idperson'];
+    $smarty->assign('can_review', canReview($client, $_GET['id']));
+}
 
 $smarty->assign('product', $product);
 $smarty->assign('reviews', $reviews['reviews']);

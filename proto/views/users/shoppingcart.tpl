@@ -3,7 +3,7 @@
 {block name=content}
 <link rel="stylesheet" href="{$BASE_URL}css/shoppingcart.css">
 
-{include file='common/left-panel.tpl' grid_opt='col-sm-2 text-xs-center text-sm-left'}
+{include file='common/left-panel.tpl' grid_opt='col-sm-2 text-xs-center'}
 
 <div class="col-sm-10 main-content">
     <h3>Shopping Cart <span id="num-products" class="text-muted">({count($products)} product{if count($products) != 1}s{/if})</span></h3>
