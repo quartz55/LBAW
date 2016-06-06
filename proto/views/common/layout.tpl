@@ -35,6 +35,7 @@
     <footer class="row">
         <div class="col-xs-12">
             <span class="h5">LBAW</span>
+            <a class="btn btn-default pull-right" href="{$BASE_URL}pages/admin/control-panel.php">Control Panel</a>
         </div>
     </footer>
 </div>

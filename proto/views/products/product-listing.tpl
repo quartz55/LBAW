@@ -14,10 +14,10 @@
 {/for}
 {/function}
 
-{if ($product['discountend'] != null && $smarty.now-$product['discountend']|strtotime > 0)}
-    {$price = (1 - (float)$product['discount']/100) * (float)$product['price']}
+{if ($product['discountend'] != null && $product['discountend']|strtotime - $smarty.now > 0)}
+    {$price = $product['price']|discountPrice:$product['discount']}
 {else}
-    {$price = (float)$product['price']}
+    {$price = $product['price']}
 {/if}
 
 <article class="product row">
@@ -28,6 +28,7 @@
                 {if $product['stock'] <= 0}
                 <span class="text-danger">Out of stock!</span>
                 {/if}
+
                 {$discount = $price != $product['price']}
                 {if $discount}
                     <small class="pull-right text-danger discount-ammount">-{$product['discount']}%</small>

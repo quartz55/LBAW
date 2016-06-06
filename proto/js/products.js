@@ -54,3 +54,19 @@ function updateProducts(new_products) {
     });
   });
 }
+
+jSmart.prototype.registerPlugin(
+  'modifier',
+  'discountPrice',
+  function(price, discount) {
+    return (1 - Number(discount)/100) * Number(price);
+  }
+);
+
+jSmart.prototype.registerPlugin(
+  'modifier',
+  'strtotime',
+  function(s) {
+    return (new Date(s).getTime() / 1000).toFixed(0);
+  }
+);
