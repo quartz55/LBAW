@@ -1,0 +1,12 @@
+.opt-btn {
+    background: none;
+    border: none;
+    color: #337ab7;
+    transition: 0.1s;
+    text-decoration: none;
+}
+
+.opt-btn:hover {
+    text-decoration: none;
+    color: #559cd9;
+}

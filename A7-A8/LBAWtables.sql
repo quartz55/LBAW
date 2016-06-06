@@ -20,13 +20,13 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE SystemAdministrator (
-    idPerson integer NOT NULL REFERENCES Person(idPerson),
+    idPerson integer NOT NULL REFERENCES Person(idPerson) ON DELETE CASCADE,
 
     PRIMARY KEY(idPerson)
 );
 
 CREATE TABLE Client (
-    idPerson integer NOT NULL REFERENCES Person(idPerson),
+    idPerson integer NOT NULL REFERENCES Person(idPerson) ON DELETE CASCADE,
     address text NOT NULL,
     email text UNIQUE NOT NULL,
 
@@ -50,8 +50,8 @@ CREATE TABLE Product (
 );
 
 CREATE TABLE Rate (
-    idPerson integer NOT NULL REFERENCES Client(idPerson),
-    idProduct integer NOT NULL REFERENCES Product(idProduct),
+    idPerson integer NOT NULL REFERENCES Client(idPerson) ON DELETE CASCADE,
+    idProduct integer NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
     date timestamp NOT NULL,
     rating numeric NOT NULL CHECK(rating >= 0 AND rating <= 5),
     title text,
@@ -61,8 +61,8 @@ CREATE TABLE Rate (
 );
 
 CREATE TABLE ShoppingCart (
-    idPerson integer NOT NULL REFERENCES Client(idPerson),
-    idProduct integer NOT NULL REFERENCES Product(idProduct),
+    idPerson integer NOT NULL REFERENCES Client(idPerson) ON DELETE CASCADE,
+    idProduct integer NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
     quantity integer NOT NULL CHECK(quantity>0),
 
     CONSTRAINT pk_ShoppingCart PRIMARY KEY(idPerson,idProduct)
@@ -72,14 +72,14 @@ CREATE TABLE Checkout (
     idCheckout SERIAL NOT NULL,
     date timestamp NOT NULL,
     idPerson integer NOT NULL,
-    CONSTRAINT fk_Client FOREIGN KEY(idPerson) REFERENCES Client(idPerson),
+    CONSTRAINT fk_Client FOREIGN KEY(idPerson) REFERENCES Client(idPerson) ON DELETE CASCADE,
 
     PRIMARY KEY(idCheckout)
 );
 
 CREATE TABLE Purchase (
-    idProduct integer NOT NULL REFERENCES Product(idProduct),
-    idCheckout integer NOT NULL REFERENCES Checkout(idCheckout),
+    idProduct integer NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
+    idCheckout integer NOT NULL REFERENCES Checkout(idCheckout) ON DELETE CASCADE,
     price numeric NOT NULL CHECK(price > 0),
     quantity integer CHECK (quantity > 0),
 
@@ -96,16 +96,16 @@ CREATE TABLE SupportTicket (
     idAdmin integer NOT NULL,
     idProduct integer NOT NULL,
     idCheckout integer NOT NULL,
-    CONSTRAINT fk_Client FOREIGN KEY(idClient) REFERENCES Client(idPerson),
-    CONSTRAINT fk_SystemAdmnistrator FOREIGN KEY(idAdmin) REFERENCES SystemAdministrator(idPerson),
-    CONSTRAINT fk_Purchase FOREIGN KEY(idProduct,idCheckout) REFERENCES Purchase(idProduct,idCheckout),
+    CONSTRAINT fk_Client FOREIGN KEY(idClient) REFERENCES Client(idPerson) ON DELETE CASCADE,
+    CONSTRAINT fk_SystemAdmnistrator FOREIGN KEY(idAdmin) REFERENCES SystemAdministrator(idPerson) ON DELETE CASCADE,
+    CONSTRAINT fk_Purchase FOREIGN KEY(idProduct,idCheckout) REFERENCES Purchase(idProduct,idCheckout) ON DELETE CASCADE,
 
     PRIMARY KEY(idSupportTicket)
 );
 
 CREATE TABLE WishList (
-    idPerson integer NOT NULL REFERENCES Client(idPerson),
-    idProduct integer NOT NULL REFERENCES Product(idProduct),
+    idPerson integer NOT NULL REFERENCES Client(idPerson) ON DELETE CASCADE,
+    idProduct integer NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
 
     CONSTRAINT pk_WishList PRIMARY KEY(idPerson,idProduct)
 );
@@ -118,8 +118,8 @@ CREATE TABLE Tags (
 );
 
 CREATE TABLE TagsProducts (
-    idTags integer NOT NULL REFERENCES Tags(idTags),
-    idProduct integer NOT NULL REFERENCES Product(idProduct),
+    idTags integer NOT NULL REFERENCES Tags(idTags) ON DELETE CASCADE,
+    idProduct integer NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
 
     CONSTRAINT pk_TagsProducts PRIMARY KEY(idTags,idProduct)
 );

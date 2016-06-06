@@ -7,8 +7,8 @@ if (!$_POST['email'] || !$_POST['pass']) {
     exit;
 }
 
-$email = $_POST['email'];
-$password = $_POST['pass'];
+$email = strip_tags($_POST['email']);
+$password = strip_tags($_POST['pass']);
 
 $user = canLogin($email, $password);
 if ($user == true) {

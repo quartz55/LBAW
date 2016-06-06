@@ -1,4 +1,26 @@
 <?php
+
+function getAdmins() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * From Person JOIN SystemAdministrator using (idperson)");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getClients() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * From Person JOIN Client using (idperson)");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function canAuthenticate($admin, $pass) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM Person JOIN SystemAdministrator using (idperson) WHERE name = ? AND password = ?");
+    $stmt->execute(array($admin, sha1($pass)));
+    return $stmt->fetch();
+}
+
 function canLogin($email, $pass) {
   global $conn;
   $stmt = $conn->prepare("SELECT * FROM client JOIN person USING (idperson) WHERE email = ? AND password = ?");
@@ -59,4 +81,30 @@ function updateClient($id, $name, $pass, $addr) {
     }
 
 }
+
+function removeUser($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM Person WHERE idperson = ?");
+    $stmt->execute(array($id));
+    return $stmt->fetch();
+}
+
+function createAdmin($name, $pass) {
+    global $conn;
+    $conn->beginTransaction();
+    try {
+        $stmt = $conn->prepare("INSERT INTO Person (name, password) VALUES (?, ?)");
+        $stmt->execute(array($name, sha1($pass)));
+
+        $id = $conn->lastInsertId('person_idperson_seq');
+        $stmt = $conn->prepare("INSERT INTO SystemAdministrator VALUES (?)");
+        $stmt->execute(array($id));
+
+        $conn->commit();
+    } catch (PDOException $e) {
+        $conn->rollBack();
+        throw $e;
+    }
+}
+
 ?>

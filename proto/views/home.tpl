@@ -11,11 +11,6 @@
 
     <a href="{$BASE_URL}pages/products/product.php?id={$product['idproduct']}" class="product-card-link">
         <div class="card product-card text-xs-center">
-            {if $discount}
-                <div class="card-header">
-                    Discount!
-                </div>
-            {/if}
             <img class="card-img-top img-fluid" alt="Product Image" src="http://placehold.it/350x250"/>
             <div class="card-block">
                 <h4 class="card-title">{$product.name}</h4>
