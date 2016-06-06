@@ -44,6 +44,7 @@ CREATE TABLE Product (
     discountEnd Date,
     featured boolean,
     description text DEFAULT 'No Description',
+    imagePath text,
 
     PRIMARY KEY(idProduct)
 );
@@ -205,6 +206,8 @@ BEGIN
   (SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout) AND
 idProduct = NEW.idProduct))
   THEN
+   UPDATE Product SET stock = stock - (SELECT quantity FROM ShoppingCart WHERE idProduct = NEW.idProduct AND idPerson=(SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout))
+WHERE idProduct = NEW.idProduct;
   DELETE FROM ShoppingCart WHERE idProduct = NEW.idProduct AND
   idPerson=(SELECT idPerson FROM Checkout WHERE idCheckout=NEW.idCheckout);
   UPDATE Product SET stock = stock - NEW.quantity WHERE idProduct = NEW.idProduct;
@@ -312,3 +315,21 @@ CREATE TRIGGER updateStock
 AFTER DELETE ON ShoppingCart
 FOR EACH ROW
 EXECUTE PROCEDURE updateStock();
+
+-- verifica se possivel fazer rate
+CREATE OR REPLACE FUNCTION checkRate() RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.idPerson NOT IN (SELECT idPerson FROM Checkout WHERE idCheckout IN (SELECT idCheckout 
+FROM Purchase WHERE idProduct = NEW.idProduct))
+ THEN
+	RAISE EXCEPTION 'impossivel Rate';
+END IF;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER checkRate
+BEFORE INSERT OR UPDATE ON Rate
+FOR EACH ROW
+EXECUTE PROCEDURE checkRate();
