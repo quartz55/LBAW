@@ -44,6 +44,7 @@ CREATE TABLE Product (
     discountEnd Date,
     featured boolean,
     description text DEFAULT 'No Description',
+    imagePath text,
 
     PRIMARY KEY(idProduct)
 );
