@@ -1,3 +1,7 @@
+{extends 'common/layout.tpl'}
+
+{block name=content}
+
 {function name=stars}
 {math equation="floor(x)" x=$rating assign=full_stars}
 {math equation="x - floor(x)" x=$rating y=$rating assign=half_stars}
@@ -13,11 +17,6 @@
     <i class="fa fa-star-o"></i>
 {/for}
 {/function}
-
-
-{extends 'common/layout.tpl'}
-
-{block name=content}
 <link href="{$BASE_URL}css/product.css" rel="stylesheet"/>
 
 {include file='common/left-panel.tpl' grid_opt="col-md-2 text-xs-center"}

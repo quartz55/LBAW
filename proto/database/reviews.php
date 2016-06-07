@@ -7,11 +7,11 @@ function canReview($user, $product) {
 
     $stmt2 = $conn->prepare("SELECT * FROM Rate where idperson = ? AND idproduct = ?");
     $stmt2->execute(array($user, $product));
-    return !empty($stmt->fetchAll()) && empty($stmt2->fetch());
+    return count($stmt->fetchAll()) > 0 && count($stmt2->fetchAll()) == 0;
 }
 
 function getReviews($id) {
-    $final = array();
+    $final = [];
 
     global $conn;
     $stmt = $conn->prepare("SELECT Rate.*, Person.name FROM Rate JOIN Person using (idPerson) WHERE idProduct=? ORDER BY date DESC");
