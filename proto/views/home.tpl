@@ -11,7 +11,7 @@
 
     <a href="{$BASE_URL}pages/products/product.php?id={$product['idproduct']}" class="product-card-link">
         <div class="card product-card text-xs-center">
-            <img class="card-img-top img-fluid" alt="Product Image" src="http://placehold.it/350x250"/>
+            <img class="card-img-top img-fluid" alt="Product Image" src="{$BASE_URL}resources/products/{$product['imagepath']}"/>
             <div class="card-block">
                 <h4 class="card-title">{$product.name}</h4>
                 <span class="price-tag">€{getProductPrice($product)}</span>

@@ -36,7 +36,7 @@
                 <span class="price-tag pull-right">&euro;{$price}</span>
             </div>
             <div class="col-sm-3">
-                <img src="http://placehold.it/350x250" class="img-fluid img-rounded product-image" />
+                <img src="{$BASE_URL}resources/products/{$product['imagepath']}" class="img-fluid img-rounded product-image" />
             </div>
             <div class="col-sm-9 product-list-description">
                 <div class="product-list-rating">

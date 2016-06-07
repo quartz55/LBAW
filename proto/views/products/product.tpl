@@ -53,7 +53,7 @@
 
     <div class="product-info row">
         <div class="product-image col-md-4">
-            <img src="http://placehold.it/350x250" class="img-fluid img-rounded center-block" />
+            <img src="{$BASE_URL}resources/products/{$product['imagepath']}" class="img-fluid img-rounded center-block" />
         </div>
         <div class="product-description col-md-8">
             <p>{$product.description}</p>

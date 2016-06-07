@@ -74,14 +74,7 @@
         </nav>
         <!-- Page Content -->
         <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        {block name=content} {/block}
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
+            {block name=content} {/block}
             </div>
             <!-- /.container-fluid -->
         </div>

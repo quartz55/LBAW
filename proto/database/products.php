@@ -51,5 +51,11 @@ function getProduct($id) {
     return $stmt->fetch();
 }
 
+function removeProduct($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM Product WHERE idproduct = ?");
+    $stmt->execute(array($id));
+    return $stmt->fetch();
+}
 
 ?>

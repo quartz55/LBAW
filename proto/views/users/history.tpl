@@ -25,7 +25,7 @@
         <a href="{$BASE_URL}pages/products/product.php?id={$purchase['idproduct']}" class="purchase-link">
             <div class="purchase">
                 <span class="qty">&times{$purchase['quantity']}</span>
-                <img class="img-rounded purchase-img" src="http://placehold.it/350x250"/>
+                <img class="img-rounded purchase-img" src="{$BASE_URL}resources/products/{$purchase['imagepath']}"/>
                 <span class="purchase-name">{$purchase['name']} <small class="label label-default">#{$purchase['code']}</small></span>
                 <span class="price-tag">€{$purchase['rprice']}</span>
             </div>
