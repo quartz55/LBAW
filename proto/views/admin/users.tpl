@@ -25,7 +25,7 @@
                             <tr>
                                 <td class="text-center col-xs-1" style="vertical-align: middle">
                                     <form class="form-inline" method="POST" action="{$BASE_URL}actions/admin/ban-user.php">
-                                        <a class="opt-btn" href="#" data-toggle="tooltip" title="Edit">
+                                        <a class="opt-btn" href="{$BASE_URL}pages/admin/edit-admin.php?id={$admin['idperson']}" data-toggle="tooltip" title="Edit">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <input name="id" type="hidden" value="{$admin['idperson']}"/>
@@ -75,7 +75,7 @@
                             <tr>
                                 <td class="text-center col-xs-1" style="vertical-align: middle">
                                     <form class="form-inline" method="POST" action="{$BASE_URL}actions/admin/ban-user.php">
-                                        <a class="opt-btn" href="#" data-toggle="tooltip" title="Edit">
+                                        <a class="opt-btn" href="{$BASE_URL}pages/admin/edit-client.php?id={$client['idperson']}" data-toggle="tooltip" title="Edit">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <input name="id" type="hidden" value="{$client['idperson']}"/>

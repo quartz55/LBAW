@@ -28,11 +28,24 @@ function canLogin($email, $pass) {
   return $stmt->fetch();
 }
 
-function getClient($email) {
+function getClient($email = null, $id = null) {
   global $conn;
-  $stmt = $conn->prepare("SELECT * FROM client JOIN person USING (idperson) WHERE email = ?");
-  $stmt->execute(array($email));
+  if ($email) {
+      $stmt = $conn->prepare("SELECT * FROM client JOIN person USING (idperson) WHERE email = ?");
+      $stmt->execute(array($email));
+  }
+  else {
+      $stmt = $conn->prepare("SELECT * FROM client JOIN person USING (idperson) WHERE idperson = ?");
+      $stmt->execute(array($id));
+  }
   return $stmt->fetch();
+}
+
+function getAdmin($id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM SystemAdministrator JOIN Person USING (idperson) WHERE idPerson = ?");
+    $stmt->execute(array($id));
+    return $stmt->fetch();
 }
 
 function registerClient($email, $name, $pass, $addr) {
@@ -80,6 +93,20 @@ function updateClient($id, $name, $pass, $addr) {
         throw $e;
     }
 
+}
+
+function updateAdmin($id, $name, $pass) {
+    global $conn;
+
+    if (!$pass) {
+        $stmt = $conn->prepare('UPDATE Person SET name=? WHERE idperson=?');
+        $stmt->execute(array($name,$id));
+    }
+    else {
+        $stmt = $conn->prepare('UPDATE Person SET name=?,password=? WHERE idperson=?');
+        $stmt->execute(array($name,sha1($pass),$id));
+    }
+    return $stmt->fetch();
 }
 
 function removeUser($id) {
