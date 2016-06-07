@@ -36,17 +36,17 @@ INSERT INTO Person (name,password) VALUES ('Joao Costa','4c8ceb321d8d60fb455f92c
 INSERT INTO Person (name,password) VALUES ('Antonio Fonseca','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
 INSERT INTO Person (name,password) VALUES ('Joana Tomé','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
 INSERT INTO Person (name,password) VALUES ('Tony Madeira','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
-INSERT INTO Person (name,password) VALUES ('Liliana Faria','4b1e41533fab609b93160ac40c7ae9b26a66acdc');
-INSERT INTO Person (name,password) VALUES ('Joao Postiga','0be9b3674549e2621cb8a25b580783daa3be8050');
-INSERT INTO Person (name,password) VALUES ('Pedro Morim','b4318fff62e9af9ac01367f377277508c1ab7c3a');
-INSERT INTO Person (name,password) VALUES ('Carlos Costa','6dedd437c11fdef99ddf4ad0b201e5fad85f2544');
-INSERT INTO Person (name,password) VALUES ('Mario Carvalho','a5a049a327a6b000f1dfc09b9c15c32e1b370b7b');
-INSERT INTO Person (name,password) VALUES ('Catarina Ferreira','b5c28c27308c052ab53ade6171f51213e6f9e14d');
-INSERT INTO Person (name,password) VALUES ('Paula Santos','84499612a3e46d2855fb6faaf1427cdf8f56c151');
-INSERT INTO Person (name,password) VALUES ('Helena Vieira','58670d1bf69a8edf839e0ed655ab1d11ea23b0b4');
-INSERT INTO Person (name,password) VALUES ('Nadia Albano','93858b4335f0aa4358a3ec85ce9d983a8e08736c');
-INSERT INTO Person (name,password) VALUES ('Marta Gomes','be13ffc75da834e36f5cd0145d1b3355b13714d0');
-INSERT INTO Person (name,password) VALUES ('Pedro Ribeiro','1f76c64114186243115f5701e12119e547772be0');
+INSERT INTO Person (name,password) VALUES ('Liliana Faria','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Joao Postiga','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Pedro Morim','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Carlos Costa','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Mario Carvalho','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Catarina Ferreira','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Paula Santos','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Helena Vieira','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Nadia Albano','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Marta Gomes','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
+INSERT INTO Person (name,password) VALUES ('Pedro Ribeiro','4c8ceb321d8d60fb455f92ce20e88aa90a718c0d');
 
 INSERT INTO Client (idPerson,address,email) VALUES (1,'Rua Carlos Paiao 145','marimizuna@gmail.com');
 INSERT INTO Client (idPerson,address,email) VALUES (2,'Largo Sidonio Pais 27','nicolia@slb.com');
