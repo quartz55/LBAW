@@ -11,10 +11,10 @@
 <link href="{$BASE_URL}css/control-panel.css" rel="stylesheet" />
 
 <!-- Bootstrap Core CSS -->
-<link href="{$BASE_URL}bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="{$BASE_URL}css/bootstrap3.min.css" rel="stylesheet">
 
 <!-- MetisMenu CSS -->
-<link href="{$BASE_URL}bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<link href="{$BASE_URL}css/metisMenu.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="{$BASE_URL}css/sb-admin-2.css" rel="stylesheet">
@@ -86,7 +86,7 @@
     {include file='common/scripts.tpl'}
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{$BASE_URL}bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="{$BASE_URL}js/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{$BASE_URL}js/sb-admin-2.js"></script>
