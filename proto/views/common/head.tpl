@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Online Shop</title>
+    <title>StreetWay - Online Shop</title>
     <meta charset='utf-8'>
 
     <link rel="stylesheet" href="{$BASE_URL}css/bootstrap.min.css">
