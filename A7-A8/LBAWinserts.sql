@@ -128,14 +128,14 @@ INSERT INTO Purchase (idProduct, idCheckout, price, quantity) VALUES (15,17,60.0
 INSERT INTO Purchase (idProduct, idCheckout, price, quantity) VALUES (15,18,60.00,1);
 
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (1,1,'2016-04-30',5,'Awesome Shirt','Fast delivery,quality assured. Wonderful product');
-INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (2,2,'2016-04-30',4.5,NULL,'I loved the product and the professionalism.');
-INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (6,5,'2016-05-25',4.7,NULL,'It is definitely a great product to buy.');
-INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (7,6,'2016-01-4',4.8,NULL,'Makes up for all the money invested.');
-INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (9,8,'2016-03-4',4.9,NULL,'Makes up for all the money invested.');
+INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (2,2,'2016-04-30',4,NULL,'I loved the product and the professionalism.');
+INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (6,5,'2016-05-25',5,NULL,'It is definitely a great product to buy.');
+INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (7,6,'2016-01-4',5,NULL,'Makes up for all the money invested.');
+INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (9,8,'2016-03-4',5,NULL,'Makes up for all the money invested.');
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (11,11,'2016-05-2',5,NULL,'I''m really happy with this product. Thanks :)');
 INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (15,15,'2016-03-5',5,'In Love','This product is absolutely spectacular');
-INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (14,15,'2016-04-18',4.5,NULL,'this product molds to my body , I love it');
-INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (13,15,'2016-04-15',4.7,NULL,'I advise buying this product is wonderful');
+INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (14,15,'2016-04-18',4,NULL,'this product molds to my body , I love it');
+INSERT INTO Rate (idPerson,idProduct,date,rating,title,description) VALUES (13,15,'2016-04-15',4,NULL,'I advise buying this product is wonderful');
 
 INSERT INTO WishList (idPerson,idProduct) VALUES (1,5);
 INSERT INTO WishList (idPerson,idProduct) VALUES (4,6);
